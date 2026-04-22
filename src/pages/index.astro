@@ -7,7 +7,7 @@ import CityCard from '@components/CityCard.astro';
 // Hiện tại hardcode để match với home.html mẫu
 const popularQuestions = [
   {
-    href: '/hoi-an/must-try-dishes/',
+    href: '/questions/hoi-an/must-try-dishes-hoi-an/',
     category: 'Food',
     city: 'Hoi An',
     readingTime: 6,
@@ -15,7 +15,7 @@ const popularQuestions = [
     preview: "Five dishes define Hoi An's table: Cao Lầu, the town's signature noodle; Bánh Mì Phượng, made famous by Bourdain; white rose dumplings; Mì Quảng; and Cơm Gà…",
   },
   {
-    href: '/hanoi/hanoi-to-sapa/',
+    href: '/questions/hanoi/hanoi-to-sapa/',
     category: 'Transport',
     city: 'Hanoi',
     readingTime: 4,
@@ -23,7 +23,7 @@ const popularQuestions = [
     preview: 'The overnight sleeper bus is the most practical option — eight hours door to door, around 350,000 VND. The train stops short of Sapa itself…',
   },
   {
-    href: '/central/best-month-to-visit/',
+    href: '/questions/central/best-month-to-visit/',
     category: 'Weather',
     city: 'Central coast',
     readingTime: 3,
@@ -31,7 +31,7 @@ const popularQuestions = [
     preview: 'February through May is the honest answer. Skies are dry, the rivers low, and the evenings in Hoi An warm enough for a linen shirt…',
   },
   {
-    href: '/ho-chi-minh/bargaining-etiquette/',
+    href: '/questions/ho-chi-minh/bargaining-etiquette/',
     category: 'Culture',
     city: 'Ho Chi Minh',
     readingTime: 7,
@@ -39,7 +39,7 @@ const popularQuestions = [
     preview: 'Not at Bến Thành — bargaining is expected, and vendors build it into their asking price. At a neighborhood market the rules change…',
   },
   {
-    href: '/vietnam/motorbike-safety/',
+    href: '/questions/vietnam/motorbike-safety/',
     category: 'Safety',
     city: 'Nationwide',
     readingTime: 5,
@@ -47,7 +47,7 @@ const popularQuestions = [
     preview: 'The short answer: safer than its reputation, but not casually safe. Outside the big cities traffic calms quickly, and coastal loops like Hải Vân…',
   },
   {
-    href: '/vietnam/daily-budget/',
+    href: '/questions/vietnam/daily-budget/',
     category: 'Budget',
     city: 'Nationwide',
     readingTime: 5,
@@ -68,11 +68,11 @@ const cities = [
 ];
 
 const recentAnswers = [
-  { date: 'Apr 21', category: 'Transport', city: 'Hanoi', title: 'Which district should I stay in for a first trip to Hanoi?', readingTime: 4, href: '/hanoi/best-district-first-trip/' },
-  { date: 'Apr 19', category: 'Food', city: 'Ho Chi Minh', title: 'Where do locals eat bánh xèo in Saigon (not the tourist version)?', readingTime: 5, href: '/ho-chi-minh/local-banh-xeo/' },
-  { date: 'Apr 17', category: 'Planning', city: 'Nationwide', title: 'Is two weeks enough time to see Vietnam end to end?', readingTime: 8, href: '/vietnam/two-weeks-itinerary/' },
-  { date: 'Apr 14', category: 'Culture', city: 'Hue', title: 'What should I know before visiting the Imperial City?', readingTime: 6, href: '/hue/imperial-city/' },
-  { date: 'Apr 12', category: 'Budget', city: 'Phu Quoc', title: 'Is Phu Quoc more expensive than the mainland?', readingTime: 4, href: '/phu-quoc/cost-vs-mainland/' },
+  { date: 'Apr 21', category: 'Transport', city: 'Hanoi', title: 'Which district should I stay in for a first trip to Hanoi?', readingTime: 4, href: '/questions/hanoi/best-district-first-trip/' },
+  { date: 'Apr 19', category: 'Food', city: 'Ho Chi Minh', title: 'Where do locals eat bánh xèo in Saigon (not the tourist version)?', readingTime: 5, href: '/questions/ho-chi-minh/local-banh-xeo/' },
+  { date: 'Apr 17', category: 'Planning', city: 'Nationwide', title: 'Is two weeks enough time to see Vietnam end to end?', readingTime: 8, href: '/questions/vietnam/two-weeks-itinerary/' },
+  { date: 'Apr 14', category: 'Culture', city: 'Hue', title: 'What should I know before visiting the Imperial City?', readingTime: 6, href: '/questions/hue/imperial-city/' },
+  { date: 'Apr 12', category: 'Budget', city: 'Phu Quoc', title: 'Is Phu Quoc more expensive than the mainland?', readingTime: 4, href: '/questions/phu-quoc/cost-vs-mainland/' },
 ];
 ---
 
@@ -112,11 +112,11 @@ const recentAnswers = [
       </form>
       <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
         <span class="eyebrow" style="margin-right:8px">Try —</span>
-        <a href="/hoi-an/best-time-to-visit/" class="chip">Best time to visit Hoi An</a>
-        <a href="/hanoi/hanoi-to-sapa/" class="chip">How to get from Hanoi to Sapa</a>
-        <a href="/phu-quoc/october-visit/" class="chip">Is Phu Quoc worth it in October?</a>
-        <a href="/ho-chi-minh/district-1-food/" class="chip">Where to eat in District 1</a>
-        <a href="/da-nang/safe-cafes/" class="chip">Safe cafés in Da Nang</a>
+        <a href="/questions/hoi-an/best-time-to-visit/" class="chip">Best time to visit Hoi An</a>
+        <a href="/questions/hanoi/hanoi-to-sapa/" class="chip">How to get from Hanoi to Sapa</a>
+        <a href="/questions/phu-quoc/october-visit/" class="chip">Is Phu Quoc worth it in October?</a>
+        <a href="/questions/ho-chi-minh/district-1-food/" class="chip">Where to eat in District 1</a>
+        <a href="/questions/da-nang/safe-cafes/" class="chip">Safe cafés in Da Nang</a>
       </div>
     </div>
   </section>

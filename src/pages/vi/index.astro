@@ -5,7 +5,7 @@ import CityCard from '@components/CityCard.astro';
 
 const popularQuestions = [
   {
-    href: '/vi/hoi-an/mon-ngon-phai-thu/',
+    href: '/vi/questions/hoi-an/mon-ngon-phai-thu/',
     category: 'Ẩm thực',
     city: 'Hội An',
     readingTime: 6,
@@ -13,7 +13,7 @@ const popularQuestions = [
     preview: 'Năm món định hình bàn ăn Hội An: Cao Lầu - đặc sản mì riêng của phố, Bánh Mì Phượng đã được Bourdain nhắc tới, bánh bao bánh vạc, Mì Quảng, và Cơm Gà…',
   },
   {
-    href: '/vi/hanoi/ha-noi-di-sapa/',
+    href: '/vi/questions/hanoi/ha-noi-di-sapa/',
     category: 'Di chuyển',
     city: 'Hà Nội',
     readingTime: 4,
@@ -21,7 +21,7 @@ const popularQuestions = [
     preview: 'Xe giường nằm đêm là lựa chọn thực tế nhất - tám tiếng tới nơi, giá khoảng 350.000 VND. Tàu hoả không đi thẳng tới Sa Pa…',
   },
   {
-    href: '/vi/mien-trung/thoi-diem-tot-nhat/',
+    href: '/vi/questions/mien-trung/thoi-diem-tot-nhat/',
     category: 'Thời tiết',
     city: 'Miền Trung',
     readingTime: 3,
@@ -29,7 +29,7 @@ const popularQuestions = [
     preview: 'Tháng 2 đến tháng 5 là câu trả lời thành thật nhất. Trời khô, nước sông thấp, và buổi tối ở Hội An đủ ấm để mặc áo linen…',
   },
   {
-    href: '/vi/ho-chi-minh/mac-ca-cho/',
+    href: '/vi/questions/ho-chi-minh/mac-ca-cho/',
     category: 'Văn hoá',
     city: 'TP. Hồ Chí Minh',
     readingTime: 7,
@@ -37,7 +37,7 @@ const popularQuestions = [
     preview: 'Ở Bến Thành thì không - việc mặc cả được mặc định sẵn, người bán đã tính vào giá chào. Ở chợ dân sinh thì luật chơi khác…',
   },
   {
-    href: '/vi/vietnam/thue-xe-may-an-toan/',
+    href: '/vi/questions/vietnam/thue-xe-may-an-toan/',
     category: 'An toàn',
     city: 'Toàn quốc',
     readingTime: 5,
@@ -45,7 +45,7 @@ const popularQuestions = [
     preview: 'Ngắn gọn: an toàn hơn bạn tưởng, nhưng không phải kiểu "vô tư đi đâu cũng được". Ngoài thành phố lớn giao thông dịu đi nhanh chóng…',
   },
   {
-    href: '/vi/vietnam/chi-phi-mot-ngay/',
+    href: '/vi/questions/vietnam/chi-phi-mot-ngay/',
     category: 'Chi phí',
     city: 'Toàn quốc',
     readingTime: 5,
@@ -66,11 +66,11 @@ const cities = [
 ];
 
 const recentAnswers = [
-  { date: '21 Th4', category: 'Di chuyển', city: 'Hà Nội', title: 'Đi Hà Nội lần đầu nên ở quận nào?', readingTime: 4, href: '/vi/hanoi/quan-o-lan-dau/' },
-  { date: '19 Th4', category: 'Ẩm thực', city: 'TP.HCM', title: 'Người Sài Gòn ăn bánh xèo ở đâu (không phải chỗ khách du lịch)?', readingTime: 5, href: '/vi/ho-chi-minh/banh-xeo-dia-phuong/' },
-  { date: '17 Th4', category: 'Lên kế hoạch', city: 'Toàn quốc', title: 'Hai tuần có đủ đi Việt Nam từ Bắc vào Nam không?', readingTime: 8, href: '/vi/vietnam/lich-trinh-hai-tuan/' },
-  { date: '14 Th4', category: 'Văn hoá', city: 'Huế', title: 'Trước khi đi Đại Nội cần biết những gì?', readingTime: 6, href: '/vi/hue/dai-noi/' },
-  { date: '12 Th4', category: 'Chi phí', city: 'Phú Quốc', title: 'Phú Quốc có đắt hơn đất liền không?', readingTime: 4, href: '/vi/phu-quoc/chi-phi-so-voi-dat-lien/' },
+  { date: '21 Th4', category: 'Di chuyển', city: 'Hà Nội', title: 'Đi Hà Nội lần đầu nên ở quận nào?', readingTime: 4, href: '/vi/questions/hanoi/quan-o-lan-dau/' },
+  { date: '19 Th4', category: 'Ẩm thực', city: 'TP.HCM', title: 'Người Sài Gòn ăn bánh xèo ở đâu (không phải chỗ khách du lịch)?', readingTime: 5, href: '/vi/questions/ho-chi-minh/banh-xeo-dia-phuong/' },
+  { date: '17 Th4', category: 'Lên kế hoạch', city: 'Toàn quốc', title: 'Hai tuần có đủ đi Việt Nam từ Bắc vào Nam không?', readingTime: 8, href: '/vi/questions/vietnam/lich-trinh-hai-tuan/' },
+  { date: '14 Th4', category: 'Văn hoá', city: 'Huế', title: 'Trước khi đi Đại Nội cần biết những gì?', readingTime: 6, href: '/vi/questions/hue/dai-noi/' },
+  { date: '12 Th4', category: 'Chi phí', city: 'Phú Quốc', title: 'Phú Quốc có đắt hơn đất liền không?', readingTime: 4, href: '/vi/questions/phu-quoc/chi-phi-so-voi-dat-lien/' },
 ];
 ---
 
@@ -110,11 +110,11 @@ const recentAnswers = [
       </form>
       <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
         <span class="eyebrow" style="margin-right:8px">Thử —</span>
-        <a href="/vi/hoi-an/thoi-diem-dep-nhat/" class="chip">Đi Hội An tháng nào đẹp</a>
-        <a href="/vi/hanoi/ha-noi-di-sapa/" class="chip">Hà Nội đi Sa Pa</a>
-        <a href="/vi/phu-quoc/thang-10/" class="chip">Phú Quốc tháng 10 có nên đi</a>
-        <a href="/vi/ho-chi-minh/an-quan-1/" class="chip">Ăn gì ở Quận 1</a>
-        <a href="/vi/da-nang/cafe-dep/" class="chip">Café yên tĩnh ở Đà Nẵng</a>
+        <a href="/vi/questions/hoi-an/thoi-diem-dep-nhat/" class="chip">Đi Hội An tháng nào đẹp</a>
+        <a href="/vi/questions/hanoi/ha-noi-di-sapa/" class="chip">Hà Nội đi Sa Pa</a>
+        <a href="/vi/questions/phu-quoc/thang-10/" class="chip">Phú Quốc tháng 10 có nên đi</a>
+        <a href="/vi/questions/ho-chi-minh/an-quan-1/" class="chip">Ăn gì ở Quận 1</a>
+        <a href="/vi/questions/da-nang/cafe-dep/" class="chip">Café yên tĩnh ở Đà Nẵng</a>
       </div>
     </div>
   </section>

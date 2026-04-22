@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   });
 
   return allQuestions.map((entry) => ({
-    params: { slug: entry.data.canonicalSlug },
+    params: { city: entry.data.city, slug: entry.data.canonicalSlug },
     props: { entry },
   }));
 }
@@ -46,6 +46,7 @@ const questionNum = String(
   title={data.title}
   description={data.description}
   lang="en"
+  city={data.city}
   canonicalSlug={data.canonicalSlug}
   schemaType="Article"
   pubDate={data.pubDate}
@@ -170,7 +171,7 @@ const questionNum = String(
           <div class="eyebrow" style="margin-bottom:24px">Read next</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px">
             {related.map((r) => (
-              <a href={`/questions/${r.data.canonicalSlug}/`} class="hub-card">
+              <a href={`/questions/${r.data.city}/${r.data.canonicalSlug}/`} class="hub-card">
                 <div class="cat-tag" style="margin-bottom:8px">{categoryLabels[r.data.category]}</div>
                 <h3 style="font-size:20px;line-height:1.2">{r.data.title}</h3>
               </a>
@@ -191,7 +192,7 @@ const questionNum = String(
           </>
         )}
         <div class="hairline-t" style="margin-top:32px;padding-top:16px">
-          <a href={`/vi/questions/${data.canonicalSlug}/`} class="ulink-acc" style="font-size:14px">Đọc tiếng Việt →</a>
+          <a href={`/vi/questions/${data.city}/${data.canonicalSlug}/`} class="ulink-acc" style="font-size:14px">Đọc tiếng Việt →</a>
         </div>
       </div>
     </aside>

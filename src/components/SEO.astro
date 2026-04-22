@@ -13,6 +13,7 @@ interface Props {
   title: string;
   description: string;
   lang?: 'en' | 'vi';
+  city?: string;
   canonicalSlug?: string; // shared slug between VI/EN versions
   pathname?: string; // current path for canonical URL
   schemaType?: 'Article' | 'WebSite' | 'CollectionPage';
@@ -28,6 +29,7 @@ const {
   title,
   description,
   lang = 'en',
+  city,
   canonicalSlug,
   pathname = Astro.url.pathname,
   schemaType = 'WebSite',
@@ -43,12 +45,12 @@ const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://pholio.co'
 const canonical = `${siteUrl}${pathname}`;
 const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 
-// hreflang alternates — only if canonicalSlug provided
-// Question pages live at /questions/{slug}/ and /vi/questions/{slug}/
-const alternates = canonicalSlug
+// hreflang alternates — only if canonicalSlug + city provided
+// Question pages live at /questions/{city}/{slug}/ and /vi/questions/{city}/{slug}/
+const alternates = canonicalSlug && city
   ? {
-      en: `${siteUrl}/questions/${canonicalSlug}/`,
-      vi: `${siteUrl}/vi/questions/${canonicalSlug}/`,
+      en: `${siteUrl}/questions/${city}/${canonicalSlug}/`,
+      vi: `${siteUrl}/vi/questions/${city}/${canonicalSlug}/`,
     }
   : null;
 

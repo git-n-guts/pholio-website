@@ -86,7 +86,7 @@ const cities = Object.keys(byCity).sort();
             <div>
               {byCity[city].map((q, i) => (
                 <a
-                  href={`/vi/questions/${q.data.canonicalSlug}/`}
+                  href={`/vi/questions/${q.data.city}/${q.data.canonicalSlug}/`}
                   class="q-card"
                   style={i === 0 ? 'padding-top:0;border-top:none' : ''}
                 >

@@ -13,6 +13,7 @@ interface Props {
   title: string;
   description: string;
   lang?: 'en' | 'vi';
+  city?: string;
   canonicalSlug?: string;
   schemaType?: 'Article' | 'WebSite' | 'CollectionPage';
   pubDate?: Date;
@@ -27,6 +28,7 @@ const {
   title,
   description,
   lang = 'en',
+  city,
   canonicalSlug,
   schemaType,
   pubDate,
@@ -45,6 +47,7 @@ const {
       title={title}
       description={description}
       lang={lang}
+      city={city}
       canonicalSlug={canonicalSlug}
       schemaType={schemaType}
       pubDate={pubDate}

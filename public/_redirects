@@ -3,5 +3,6 @@
 # Redirect www to apex (uncomment khi đã có custom domain)
 # https://www.pholio.co/* https://pholio.co/:splat 301!
 
-# Legacy URL redirects go here as the site evolves
-# /old-path /new-path 301
+# Legacy question URL redirects (old: /questions/{slug}/ → new: /questions/{city}/{slug}/)
+/questions/must-try-dishes-hoi-an/ /questions/hoi-an/must-try-dishes-hoi-an/ 301
+/vi/questions/must-try-dishes-hoi-an/ /vi/questions/hoi-an/must-try-dishes-hoi-an/ 301

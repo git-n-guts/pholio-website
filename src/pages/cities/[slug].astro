@@ -138,7 +138,7 @@ const categoryDescriptions: Record<string, string> = {
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 64px">
             {byCategory[cat].map((q) => (
-              <a href={`/questions/${q.data.canonicalSlug}/`} class="q-card">
+              <a href={`/questions/${q.data.city}/${q.data.canonicalSlug}/`} class="q-card">
                 <div class="meta">
                   <span class="cat-tag">{categoryLabels[cat]}</span>
                   <span class="muted" style="font-size:12px">{q.data.readingTime} min</span>
