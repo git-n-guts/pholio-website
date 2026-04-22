@@ -29,6 +29,8 @@ button{font:inherit;cursor:pointer;border:none;background:transparent;color:inhe
 input,textarea,select{font:inherit;color:inherit}
 
 .max-page{max-width:1280px;margin:0 auto;padding:0 24px}
+@media(min-width:768px){.max-page{padding:0 48px}}
+@media(min-width:1024px){.max-page{padding:0 64px}}
 .max-prose{max-width:680px;margin:0 auto}
 .rule{height:1px;background:var(--border)}
 .hairline-t{border-top:1px solid var(--border)}
@@ -154,6 +156,8 @@ details>.answer{padding-top:14px;font-size:16px;line-height:1.7}
 /* Footer */
 .footer{background:var(--ink);color:var(--bg);margin-top:96px}
 .footer-inner{padding:96px 24px 48px}
+@media(min-width:768px){.footer-inner{padding:96px 48px 48px}}
+@media(min-width:1024px){.footer-inner{padding:96px 64px 48px}}
 .footer-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:48px;margin-bottom:80px}
 @media(max-width:767px){.footer-grid{grid-template-columns:1fr;gap:40px;margin-bottom:48px}}
 .footer h5{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,243,.6);margin-bottom:14px;font-weight:500}
