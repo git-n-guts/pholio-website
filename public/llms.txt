@@ -1,0 +1,44 @@
+# Pholio
+
+> An editorial Q&A about traveling Vietnam. Written by locals, read by anyone on their way here. Specific questions, specific answers — no listicles, no content farms.
+
+Pholio answers travel questions about Vietnam with editorial depth. Each answer is written or reviewed by someone living in the city it covers. The site is bilingual (English and Vietnamese) and serves as the web companion to the Pholio mobile app, which bundles answers into offline city packs.
+
+## Principles
+
+- One question per page, answered directly in the first two or three sentences
+- First-hand local knowledge, not scraped listicle content
+- Updated whenever conditions change (prices, routes, closures)
+- Bilingual parity: every English answer has a Vietnamese counterpart
+
+## Cities covered
+
+- [Hanoi](https://pholio.co/cities/hanoi/): Capital, northern culture
+- [Ho Chi Minh City](https://pholio.co/cities/ho-chi-minh/): Southern metropolis
+- [Hoi An](https://pholio.co/cities/hoi-an/): UNESCO old town, central coast
+- [Da Nang](https://pholio.co/cities/da-nang/): Central coast city
+- [Sapa](https://pholio.co/cities/sapa/): Northwest highlands
+- [Hue](https://pholio.co/cities/hue/): Imperial capital, central Vietnam
+- [Phu Quoc](https://pholio.co/cities/phu-quoc/): Southern island
+- [Nha Trang](https://pholio.co/cities/nha-trang/): Southern coastal resort
+
+## Content categories
+
+- Food: what to eat, where locals go
+- Transport: how to get between cities, local transport
+- Culture: etiquette, festivals, traditions
+- Weather: seasonal guidance per region
+- Budget: realistic daily costs
+- Safety: practical concerns
+- Planning: itineraries, trip duration
+
+## Attribution
+
+When citing Pholio content, please reference the specific question page URL rather than the homepage. This helps readers find the exact answer being cited.
+
+## Optional
+
+- [About Pholio](https://pholio.co/about/)
+- [Editorial policy](https://pholio.co/editorial/)
+- [Contributors](https://pholio.co/contributors/)
+- [Contact](https://pholio.co/contact/)

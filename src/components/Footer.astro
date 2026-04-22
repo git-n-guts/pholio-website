@@ -1,0 +1,103 @@
+---
+interface Props {
+  lang?: 'en' | 'vi';
+  currentPath?: string;
+}
+
+const { lang = 'en', currentPath = Astro.url.pathname } = Astro.props;
+const langPrefix = lang === 'vi' ? '/vi' : '';
+
+const copy = {
+  en: {
+    tagline: 'An editorial Q&A about traveling Vietnam. Written by locals, read by anyone on their way here.',
+    explore: 'Explore',
+    company: 'Company',
+    legal: 'Legal & app',
+    cities: 'Cities',
+    questions: 'Questions',
+    categories: 'Categories',
+    recent: 'Recent',
+    about: 'About',
+    contributors: 'Contributors',
+    editorial: 'Editorial policy',
+    contact: 'Contact',
+    privacy: 'Privacy',
+    terms: 'Terms',
+    app: 'Get the app →',
+    footerBase: '© 2026 PHOLIO · WRITTEN IN HANOI',
+  },
+  vi: {
+    tagline: 'Một Q&A biên tập về du lịch Việt Nam. Viết bởi người địa phương, đọc bởi bất kỳ ai đang trên đường đến đây.',
+    explore: 'Khám phá',
+    company: 'Công ty',
+    legal: 'Pháp lý & App',
+    cities: 'Thành phố',
+    questions: 'Câu hỏi',
+    categories: 'Chuyên mục',
+    recent: 'Mới nhất',
+    about: 'Giới thiệu',
+    contributors: 'Cộng tác viên',
+    editorial: 'Chính sách biên tập',
+    contact: 'Liên hệ',
+    privacy: 'Bảo mật',
+    terms: 'Điều khoản',
+    app: 'Tải ứng dụng →',
+    footerBase: '© 2026 PHOLIO · VIẾT TẠI HÀ NỘI',
+  },
+}[lang];
+
+const otherLangUrl = lang === 'vi'
+  ? currentPath.replace(/^\/vi/, '') || '/'
+  : `/vi${currentPath}`;
+---
+
+<footer class="footer">
+  <div class="max-page footer-inner">
+    <div class="footer-grid">
+      <div class="brand">
+        <div class="logo" style="font-size:44px;margin-bottom:16px">
+          Pholio<span class="dot">.</span>
+        </div>
+        <p style="max-width:340px;font-size:15px;line-height:1.6;color:rgba(250,248,243,.7);margin:0">
+          {copy.tagline}
+        </p>
+      </div>
+      <div class="col">
+        <h5>{copy.explore}</h5>
+        <a href={`${langPrefix}/cities/`}>{copy.cities}</a>
+        <a href={`${langPrefix}/questions/`}>{copy.questions}</a>
+        <a href={`${langPrefix}/categories/`}>{copy.categories}</a>
+        <a href={`${langPrefix}/questions/recent/`}>{copy.recent}</a>
+      </div>
+      <div class="col">
+        <h5>{copy.company}</h5>
+        <a href={`${langPrefix}/about/`}>{copy.about}</a>
+        <a href={`${langPrefix}/contributors/`}>{copy.contributors}</a>
+        <a href={`${langPrefix}/editorial/`}>{copy.editorial}</a>
+        <a href={`${langPrefix}/contact/`}>{copy.contact}</a>
+      </div>
+      <div class="col-wide">
+        <h5>{copy.legal}</h5>
+        <a href={`${langPrefix}/privacy/`}>{copy.privacy}</a>
+        <a href={`${langPrefix}/terms/`}>{copy.terms}</a>
+        <a href={`${langPrefix}/app/`}>{copy.app}</a>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span class="mono">{copy.footerBase}</span>
+      <div class="lang" role="group" aria-label="Language switcher">
+        <a
+          href={lang === 'en' ? currentPath : otherLangUrl}
+          class={lang === 'en' ? 'on' : 'off'}
+          style={lang === 'en' ? 'color:var(--bg)' : 'color:rgba(250,248,243,.6)'}
+        >EN</a>
+        <span style="opacity:.3;margin:0 4px">/</span>
+        <a
+          href={lang === 'vi' ? currentPath : otherLangUrl}
+          class={lang === 'vi' ? 'on' : 'off'}
+          style={lang === 'vi' ? 'color:var(--bg)' : 'color:rgba(250,248,243,.6)'}
+        >VI</a>
+      </div>
+    </div>
+  </div>
+</footer>

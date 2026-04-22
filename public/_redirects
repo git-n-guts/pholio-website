@@ -1,0 +1,11 @@
+# Pholio — Cloudflare Pages redirects
+
+# Redirect www to apex (uncomment when custom domain is set)
+# https://www.pholio.co/* https://pholio.co/:splat 301!
+
+# Language root redirects (optional - keep commented until needed)
+# /en/* / 301
+# /en / 301
+
+# Legacy URL redirects go here as the site evolves
+# /old-path /new-path 301

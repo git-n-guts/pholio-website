@@ -1,0 +1,23 @@
+---
+/**
+ * AnswerBox - the critical AEO component.
+ * Renders the 2-3 sentence direct answer that LLM crawlers
+ * (Perplexity, ChatGPT, Google AI Overviews) preferentially extract.
+ *
+ * Place immediately after article H1, before body prose.
+ */
+
+interface Props {
+  lang?: 'en' | 'vi';
+  label?: string;
+}
+
+const { lang = 'en', label } = Astro.props;
+
+const defaultLabel = label || (lang === 'vi' ? 'Trả lời nhanh' : 'Quick Answer');
+---
+
+<div class="answer-box" role="note" aria-label={defaultLabel}>
+  <div class="lbl">{defaultLabel}</div>
+  <p><slot /></p>
+</div>

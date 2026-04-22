@@ -1,0 +1,239 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import QuestionCard from '@components/QuestionCard.astro';
+import CityCard from '@components/CityCard.astro';
+
+const popularQuestions = [
+  {
+    href: '/vi/hoi-an/mon-ngon-phai-thu/',
+    category: 'Ẩm thực',
+    city: 'Hội An',
+    readingTime: 6,
+    title: 'Đến Hội An nhất định phải ăn món gì?',
+    preview: 'Năm món định hình bàn ăn Hội An: Cao Lầu - đặc sản mì riêng của phố, Bánh Mì Phượng đã được Bourdain nhắc tới, bánh bao bánh vạc, Mì Quảng, và Cơm Gà…',
+  },
+  {
+    href: '/vi/hanoi/ha-noi-di-sapa/',
+    category: 'Di chuyển',
+    city: 'Hà Nội',
+    readingTime: 4,
+    title: 'Đi từ Hà Nội lên Sa Pa năm 2026 bằng cách nào tiện nhất?',
+    preview: 'Xe giường nằm đêm là lựa chọn thực tế nhất - tám tiếng tới nơi, giá khoảng 350.000 VND. Tàu hoả không đi thẳng tới Sa Pa…',
+  },
+  {
+    href: '/vi/mien-trung/thoi-diem-tot-nhat/',
+    category: 'Thời tiết',
+    city: 'Miền Trung',
+    readingTime: 3,
+    title: 'Đi miền Trung tháng mấy là đẹp nhất?',
+    preview: 'Tháng 2 đến tháng 5 là câu trả lời thành thật nhất. Trời khô, nước sông thấp, và buổi tối ở Hội An đủ ấm để mặc áo linen…',
+  },
+  {
+    href: '/vi/ho-chi-minh/mac-ca-cho/',
+    category: 'Văn hoá',
+    city: 'TP. Hồ Chí Minh',
+    readingTime: 7,
+    title: 'Mặc cả ở chợ Sài Gòn có bất lịch sự không?',
+    preview: 'Ở Bến Thành thì không - việc mặc cả được mặc định sẵn, người bán đã tính vào giá chào. Ở chợ dân sinh thì luật chơi khác…',
+  },
+  {
+    href: '/vi/vietnam/thue-xe-may-an-toan/',
+    category: 'An toàn',
+    city: 'Toàn quốc',
+    readingTime: 5,
+    title: 'Thuê xe máy ở Việt Nam có an toàn không?',
+    preview: 'Ngắn gọn: an toàn hơn bạn tưởng, nhưng không phải kiểu "vô tư đi đâu cũng được". Ngoài thành phố lớn giao thông dịu đi nhanh chóng…',
+  },
+  {
+    href: '/vi/vietnam/chi-phi-mot-ngay/',
+    category: 'Chi phí',
+    city: 'Toàn quốc',
+    readingTime: 5,
+    title: 'Một ngày ở Việt Nam thực tế tốn bao nhiêu?',
+    preview: 'Backpacker: 650.000 VND. Tầm trung: 1,8 triệu. Thoải mái nhưng không xa xỉ: 3,2 triệu. Khoảng cách giữa các mức lớn hơn bạn nghĩ…',
+  },
+];
+
+const cities = [
+  { name: 'Hà Nội', region: 'Bắc · Thủ đô', questionCount: 54, href: '/vi/cities/hanoi/' },
+  { name: 'TP. Hồ Chí Minh', region: 'Nam · Đô thị', questionCount: 67, href: '/vi/cities/ho-chi-minh/' },
+  { name: 'Hội An', region: 'Trung · UNESCO', questionCount: 48, href: '/vi/cities/hoi-an/', featured: true },
+  { name: 'Đà Nẵng', region: 'Trung · Ven biển', questionCount: 31, href: '/vi/cities/da-nang/' },
+  { name: 'Sa Pa', region: 'Tây Bắc · Vùng cao', questionCount: 22, href: '/vi/cities/sapa/' },
+  { name: 'Huế', region: 'Trung · Cố đô', questionCount: 19, href: '/vi/cities/hue/' },
+  { name: 'Phú Quốc', region: 'Đảo · Phía Nam', questionCount: 27, href: '/vi/cities/phu-quoc/' },
+  { name: 'Nha Trang', region: 'Ven biển · Nghỉ dưỡng', questionCount: 18, href: '/vi/cities/nha-trang/' },
+];
+
+const recentAnswers = [
+  { date: '21 Th4', category: 'Di chuyển', city: 'Hà Nội', title: 'Đi Hà Nội lần đầu nên ở quận nào?', readingTime: 4, href: '/vi/hanoi/quan-o-lan-dau/' },
+  { date: '19 Th4', category: 'Ẩm thực', city: 'TP.HCM', title: 'Người Sài Gòn ăn bánh xèo ở đâu (không phải chỗ khách du lịch)?', readingTime: 5, href: '/vi/ho-chi-minh/banh-xeo-dia-phuong/' },
+  { date: '17 Th4', category: 'Lên kế hoạch', city: 'Toàn quốc', title: 'Hai tuần có đủ đi Việt Nam từ Bắc vào Nam không?', readingTime: 8, href: '/vi/vietnam/lich-trinh-hai-tuan/' },
+  { date: '14 Th4', category: 'Văn hoá', city: 'Huế', title: 'Trước khi đi Đại Nội cần biết những gì?', readingTime: 6, href: '/vi/hue/dai-noi/' },
+  { date: '12 Th4', category: 'Chi phí', city: 'Phú Quốc', title: 'Phú Quốc có đắt hơn đất liền không?', readingTime: 4, href: '/vi/phu-quoc/chi-phi-so-voi-dat-lien/' },
+];
+---
+
+<BaseLayout
+  title="Pholio — Câu trả lời thật từ người địa phương về du lịch Việt Nam."
+  description="Một Q&A biên tập về du lịch Việt Nam. Câu hỏi cụ thể, câu trả lời cụ thể - viết bởi những người thực sự sống ở đó."
+  lang="vi"
+  schemaType="WebSite"
+  keywords={['du lịch Việt Nam', 'hỏi đáp du lịch', 'Hội An', 'Hà Nội du lịch', 'kinh nghiệm du lịch địa phương']}
+>
+  {/* Hero */}
+  <section class="max-page" style="padding-top:96px;padding-bottom:96px">
+    <div style="max-width:960px">
+      <div class="eyebrow" style="margin-bottom:24px">Q&amp;A biên tập · Du lịch Việt Nam</div>
+      <h1 class="hero-h1">Câu trả lời thật từ người địa phương<br/>về <em>du lịch Việt Nam.</em></h1>
+      <p class="muted" style="margin-top:32px;max-width:560px;font-size:19px;line-height:1.6">
+        Câu hỏi cụ thể, câu trả lời cụ thể. Không phải danh sách top-10, không phải content farm — chỉ là tư vấn biên tập từ những người đang sống ở đó.
+      </p>
+    </div>
+
+    <div style="margin-top:56px;max-width:780px">
+      <form action="/vi/search/" method="get" class="search-wrap" role="search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m20 20-3.5-3.5"/>
+        </svg>
+        <input
+          type="search"
+          name="q"
+          class="search-input"
+          placeholder="Hỏi bất cứ điều gì về du lịch Việt Nam…"
+          aria-label="Tìm kiếm câu hỏi"
+        />
+        <span class="mono muted" style="font-size:11px;white-space:nowrap">
+          <span style="padding:3px 8px;border:1px solid var(--borderS);border-radius:4px">⏎</span> Hỏi
+        </span>
+      </form>
+      <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <span class="eyebrow" style="margin-right:8px">Thử —</span>
+        <a href="/vi/hoi-an/thoi-diem-dep-nhat/" class="chip">Đi Hội An tháng nào đẹp</a>
+        <a href="/vi/hanoi/ha-noi-di-sapa/" class="chip">Hà Nội đi Sa Pa</a>
+        <a href="/vi/phu-quoc/thang-10/" class="chip">Phú Quốc tháng 10 có nên đi</a>
+        <a href="/vi/ho-chi-minh/an-quan-1/" class="chip">Ăn gì ở Quận 1</a>
+        <a href="/vi/da-nang/cafe-dep/" class="chip">Café yên tĩnh ở Đà Nẵng</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  {/* Popular Questions */}
+  <section class="max-page sec">
+    <div class="sec-head" style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px">§ 01 · Câu hỏi phổ biến</div>
+        <h2 class="display-h2">Những câu ai cũng hỏi,<br/><em class="muted">trả lời tử tế.</em></h2>
+      </div>
+      <a href="/vi/questions/" class="ulink" style="font-size:14px">Xem tất cả 312 câu →</a>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 64px">
+      {popularQuestions.map((q) => <QuestionCard {...q} variant="grid" />)}
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  {/* Cities */}
+  <section class="max-page sec">
+    <div class="sec-head">
+      <div class="eyebrow" style="margin-bottom:16px">§ 02 · Theo thành phố</div>
+      <h2 class="display-h2">Tám điểm đến, viết cẩn thận.</h2>
+    </div>
+    <div class="city-grid">
+      {cities.map((c) => <CityCard {...c} lang="vi" />)}
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  {/* App */}
+  <section class="max-page sec">
+    <div style="display:grid;grid-template-columns:1fr;gap:64px;align-items:center" class="app-grid">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px">§ 03 · Ứng dụng</div>
+        <h2 class="display-h2" style="margin-bottom:32px">Lưu câu trả lời.<br/>Dùng <em>offline.</em></h2>
+        <p class="muted" style="font-size:18px;margin-bottom:24px;max-width:480px">
+          Ứng dụng Pholio biến mỗi câu trả lời bạn đã đọc thành một guide offline — bản đồ, địa chỉ, giờ mở cửa, và ghi chú địa phương, đóng gói theo thành phố.
+        </p>
+        <ul style="list-style:none;padding:0;margin:0 0 40px;max-width:480px">
+          <li class="hairline-b" style="display:flex;gap:12px;padding:12px 0">
+            <span class="mono muted" style="font-size:12px;padding-top:4px">01</span>
+            <span>Gói thành phố offline với các điểm và lộ trình được chọn lọc</span>
+          </li>
+          <li class="hairline-b" style="display:flex;gap:12px;padding:12px 0">
+            <span class="mono muted" style="font-size:12px;padding-top:4px">02</span>
+            <span>Hỏi trực tiếp người địa phương khi câu hỏi của bạn chưa có sẵn</span>
+          </li>
+          <li style="display:flex;gap:12px;padding:12px 0">
+            <span class="mono muted" style="font-size:12px;padding-top:4px">03</span>
+            <span>Dịch những câu nói thông dụng sang tiếng Việt, Khmer, Lào</span>
+          </li>
+        </ul>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="/vi/app/" class="store-badge">
+            <span style="display:flex;flex-direction:column">
+              <span class="sub">Tải về từ</span>
+              <span class="main">App Store</span>
+            </span>
+          </a>
+          <a href="/vi/app/" class="store-badge alt">
+            <span style="display:flex;flex-direction:column">
+              <span class="sub">Tải về từ</span>
+              <span class="main">Google Play</span>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center">
+        <div style="width:280px;height:560px;border-radius:40px;border:10px solid var(--ink);background:var(--bg);padding:16px;position:relative">
+          <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:20px;background:var(--ink);border-radius:999px"></div>
+          <div style="height:100%;width:100%;border-radius:24px;overflow:hidden;border:1px solid var(--border);display:flex;flex-direction:column">
+            <div class="hairline-b" style="padding:16px">
+              <div style="font-family:'Instrument Serif',serif;font-size:20px">Pholio</div>
+              <div class="mono muted" style="font-size:10px;margin-top:4px">OFFLINE · GÓI HỘI AN</div>
+            </div>
+            <div style="padding:16px;flex:1">
+              <div class="acc mono" style="font-size:9px;margin-bottom:4px">ẨM THỰC · ĐÃ LƯU</div>
+              <div style="font-family:'Instrument Serif',serif;font-size:18px;line-height:1.2;margin-bottom:12px">Món phải thử ở Hội An</div>
+              <div class="ph-stripes" style="height:64px;margin-bottom:12px">[ map.hoian.off ]</div>
+              <div class="hairline-t muted" style="padding-top:8px;font-size:10px">5 quán · đi bộ 1,2km</div>
+              <div class="hairline-t" style="padding-top:8px;margin-top:8px;font-size:11px">
+                <div style="font-weight:500">Bánh Mì Phượng</div>
+                <div class="muted" style="font-size:10px">2B Phan Châu Trinh · ₫40.000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  {/* Recent answers */}
+  <section class="max-page sec">
+    <div class="sec-head" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px">§ 04 · Mới trả lời</div>
+        <h2 class="display-h2">Vừa ráo mực.</h2>
+      </div>
+      <a href="/vi/questions/" class="ulink" style="font-size:14px">Tất cả bài mới →</a>
+    </div>
+    <div style="max-width:900px">
+      {recentAnswers.map((q) => <QuestionCard {...q} variant="compact" />)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @media (min-width: 900px) {
+    :global(.app-grid) {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+</style>

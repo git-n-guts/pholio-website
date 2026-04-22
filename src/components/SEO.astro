@@ -1,0 +1,179 @@
+---
+/**
+ * SEO component - handles all meta tags, JSON-LD structured data,
+ * hreflang alternates. Critical for AEO (Answer Engine Optimization).
+ */
+
+interface FAQ {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: 'en' | 'vi';
+  canonicalSlug?: string; // shared slug between VI/EN versions
+  pathname?: string; // current path for canonical URL
+  schemaType?: 'Article' | 'WebSite' | 'CollectionPage';
+  pubDate?: Date;
+  updatedDate?: Date;
+  author?: string;
+  image?: string;
+  faq?: FAQ[];
+  keywords?: string[];
+}
+
+const {
+  title,
+  description,
+  lang = 'en',
+  canonicalSlug,
+  pathname = Astro.url.pathname,
+  schemaType = 'WebSite',
+  pubDate,
+  updatedDate,
+  author = 'Pholio Editorial',
+  image = '/og-default.png',
+  faq,
+  keywords = [],
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://pholio.co';
+const canonical = `${siteUrl}${pathname}`;
+const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+
+// hreflang alternates — only if canonicalSlug provided
+// Question pages live at /questions/{slug}/ and /vi/questions/{slug}/
+const alternates = canonicalSlug
+  ? {
+      en: `${siteUrl}/questions/${canonicalSlug}/`,
+      vi: `${siteUrl}/vi/questions/${canonicalSlug}/`,
+    }
+  : null;
+
+// JSON-LD Article schema
+const articleSchema = schemaType === 'Article' && pubDate
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title,
+      description,
+      image: ogImage,
+      datePublished: pubDate.toISOString(),
+      dateModified: (updatedDate || pubDate).toISOString(),
+      author: {
+        '@type': 'Organization',
+        name: author,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Pholio',
+        logo: {
+          '@type': 'ImageObject',
+          url: `${siteUrl}/logo.png`,
+        },
+      },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': canonical,
+      },
+      inLanguage: lang,
+    }
+  : null;
+
+// JSON-LD FAQ schema — critical for AEO
+const faqSchema = faq && faq.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.a,
+        },
+      })),
+    }
+  : null;
+
+// WebSite schema for homepage
+const websiteSchema = schemaType === 'WebSite'
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Pholio',
+      description,
+      url: siteUrl,
+      inLanguage: lang,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${siteUrl}/search?q={search_term_string}`,
+        },
+        'query-input': 'required name=search_term_string',
+      },
+    }
+  : null;
+---
+
+<!-- Primary Meta Tags -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+<meta name="author" content={author} />
+
+<!-- Canonical + hreflang -->
+<link rel="canonical" href={canonical} />
+{alternates && (
+  <>
+    <link rel="alternate" hreflang="en" href={alternates.en} />
+    <link rel="alternate" hreflang="vi" href={alternates.vi} />
+    <link rel="alternate" hreflang="x-default" href={alternates.en} />
+  </>
+)}
+
+<!-- Open Graph -->
+<meta property="og:type" content={schemaType === 'Article' ? 'article' : 'website'} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content={lang === 'vi' ? 'vi_VN' : 'en_US'} />
+<meta property="og:site_name" content="Pholio" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Article-specific meta -->
+{pubDate && <meta property="article:published_time" content={pubDate.toISOString()} />}
+{updatedDate && <meta property="article:modified_time" content={updatedDate.toISOString()} />}
+
+<!-- Fonts preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+
+<!-- JSON-LD Structured Data -->
+{articleSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+)}
+{faqSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+)}
+{websiteSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+)}
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />

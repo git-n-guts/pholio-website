@@ -1,0 +1,65 @@
+---
+import SEO from '@components/SEO.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import '@styles/global.css';
+
+interface FAQ {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: 'en' | 'vi';
+  canonicalSlug?: string;
+  schemaType?: 'Article' | 'WebSite' | 'CollectionPage';
+  pubDate?: Date;
+  updatedDate?: Date;
+  author?: string;
+  image?: string;
+  faq?: FAQ[];
+  keywords?: string[];
+}
+
+const {
+  title,
+  description,
+  lang = 'en',
+  canonicalSlug,
+  schemaType,
+  pubDate,
+  updatedDate,
+  author,
+  image,
+  faq,
+  keywords,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <SEO
+      title={title}
+      description={description}
+      lang={lang}
+      canonicalSlug={canonicalSlug}
+      schemaType={schemaType}
+      pubDate={pubDate}
+      updatedDate={updatedDate}
+      author={author}
+      image={image}
+      faq={faq}
+      keywords={keywords}
+    />
+  </head>
+  <body>
+    <Header lang={lang} currentPath={Astro.url.pathname} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} currentPath={Astro.url.pathname} />
+  </body>
+</html>

@@ -1,0 +1,33 @@
+---
+interface Props {
+  href: string;
+  name: string;
+  region: string;
+  questionCount: number;
+  featured?: boolean;
+  lang?: 'en' | 'vi';
+}
+
+const {
+  href,
+  name,
+  region,
+  questionCount,
+  featured = false,
+  lang = 'en',
+} = Astro.props;
+
+const questionsLabel = lang === 'vi' ? 'câu hỏi' : 'questions';
+---
+
+<a href={href} class:list={['city-card', { feat: featured }]}>
+  <div>
+    <div class:list={['eyebrow', { acc: featured }]}>
+      {featured ? (lang === 'vi' ? 'Nổi bật' : 'Featured') : region}
+    </div>
+  </div>
+  <div>
+    <div class="city-name">{name}</div>
+    <div class="muted" style="font-size:14px">{questionCount} {questionsLabel}</div>
+  </div>
+</a>

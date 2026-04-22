@@ -1,0 +1,67 @@
+---
+interface Props {
+  lang?: 'en' | 'vi';
+  currentPath?: string;
+}
+
+const { lang = 'en', currentPath = Astro.url.pathname } = Astro.props;
+
+// Build links based on language
+const langPrefix = lang === 'vi' ? '/vi' : '';
+const navLinks = [
+  { href: `${langPrefix}/cities/`, label: lang === 'vi' ? 'Thành phố' : 'Cities' },
+  { href: `${langPrefix}/questions/`, label: lang === 'vi' ? 'Câu hỏi' : 'Questions' },
+  { href: `${langPrefix}/about/`, label: lang === 'vi' ? 'Giới thiệu' : 'About' },
+  { href: `${langPrefix}/app/`, label: 'App' },
+];
+
+// Language switcher URLs — same page in other language
+const otherLangUrl = lang === 'vi'
+  ? currentPath.replace(/^\/vi/, '') || '/'
+  : `/vi${currentPath}`;
+---
+
+<header class="hdr">
+  <div class="max-page hdr-inner">
+    <a href={langPrefix || '/'} class="logo" aria-label="Pholio home">
+      Pholio<span class="dot">.</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[{ 'is-active': currentPath.startsWith(link.href) }]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <div class="hdr-right">
+      <a
+        href={`${langPrefix}/search/`}
+        class="ic-btn"
+        aria-label={lang === 'vi' ? 'Tìm kiếm' : 'Search'}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.5-3.5" />
+        </svg>
+      </a>
+      <div class="lang" role="group" aria-label="Language switcher">
+        <a
+          href={lang === 'en' ? currentPath : otherLangUrl}
+          class={lang === 'en' ? 'on' : 'off'}
+          hreflang="en"
+          aria-current={lang === 'en' ? 'true' : 'false'}
+        >EN</a>
+        <span class="sep">/</span>
+        <a
+          href={lang === 'vi' ? currentPath : otherLangUrl}
+          class={lang === 'vi' ? 'on' : 'off'}
+          hreflang="vi"
+          aria-current={lang === 'vi' ? 'true' : 'false'}
+        >VI</a>
+      </div>
+    </div>
+  </div>
+</header>
