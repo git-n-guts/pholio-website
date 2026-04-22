@@ -5,7 +5,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 export async function getStaticPaths() {
   const cities = await getCollection('cities');
   return cities.map((city) => ({
-    params: { slug: city.slug },
+    params: { slug: city.id },
     props: { city },
   }));
 }
@@ -16,7 +16,7 @@ interface Props {
 
 const { city } = Astro.props;
 const { data } = city;
-const citySlug = city.slug;
+const citySlug = city.id;
 
 const categoryLabels: Record<string, string> = {
   food: 'Ẩm thực', transport: 'Di chuyển', culture: 'Văn hoá', weather: 'Thời tiết',
