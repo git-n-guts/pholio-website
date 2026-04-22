@@ -1,0 +1,119 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About Pholio — An editorial Q&A about Vietnam travel"
+  description="Pholio is a Q&A publication written by locals, edited like a magazine. We answer specific questions about traveling Vietnam — no listicles, no SEO ghost-towns."
+  lang="en"
+  schemaType="WebSite"
+>
+  <section class="max-page ptitle">
+    <div class="eyebrow" style="margin-top:24px">About Pholio</div>
+    <h1 class="hero-h1" style="margin-top:16px">An editorial Q&amp;A,<br/>written by <em>people who live there.</em></h1>
+  </section>
+
+  <section class="max-page" style="padding-bottom:96px">
+    <div class="max-prose prose-ed" style="margin:0">
+      <p class="drop-cap">Pholio started as a frustration. Every time a friend asked a simple question about traveling Vietnam — is this neighborhood safe, is this dish worth the queue, is this the right month — the answers online were either a listicle of thirty things or a blog post from someone who had been there once, in 2017. So we built the thing we wished existed: a Q&amp;A publication written by locals, edited like a magazine.</p>
+
+      <h2>What we do</h2>
+      <p>We answer one specific question per article. No roundups, no listicles, no SEO ghost-towns. Each answer is fact-checked against local knowledge, updated seasonally, and credited to the people who wrote it.</p>
+
+      <h2>What we don't do</h2>
+      <p>We don't take sponsorship from restaurants, hotels, or tour operators. We don't run affiliate links on editorial pages. We don't publish AI-generated content. We don't recommend places we haven't visited in the last six months.</p>
+
+      <h2>How we make money</h2>
+      <p>The Pholio app. It bundles every answer we publish into offline city packs with maps, addresses, and hours. If you find the writing useful, the app is how you pay for more of it.</p>
+
+      <h2>Where we're going</h2>
+      <p>Vietnam is the starting point — it's where our team is based. Over the next two years we'll expand to Cambodia, Laos, and Thailand, each with its own editorial team working to the same rules.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="max-page sec">
+    <div class="sec-head">
+      <div class="eyebrow" style="margin-bottom:16px">§ · By the numbers</div>
+      <h2 class="display-h2">Where we are, April 2026.</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="eyebrow" style="margin-bottom:12px">Questions answered</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:72px;line-height:.9">312</div>
+      </div>
+      <div class="stat-cell">
+        <div class="eyebrow" style="margin-bottom:12px">Cities covered</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:72px;line-height:.9">8</div>
+      </div>
+      <div class="stat-cell">
+        <div class="eyebrow" style="margin-bottom:12px">Contributors</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:72px;line-height:.9">47</div>
+      </div>
+      <div class="stat-cell">
+        <div class="eyebrow" style="margin-bottom:12px">Monthly readers</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:72px;line-height:.9">184k</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="max-page sec">
+    <div class="sec-head">
+      <div class="eyebrow" style="margin-bottom:16px">§ · The team</div>
+      <h2 class="display-h2">Small, intentionally.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+      <div class="profile-card">
+        <div class="avatar ph-solid-1"></div>
+        <div>
+          <div style="font-family:'Instrument Serif',serif;font-size:22px;line-height:1.2">Linh Phạm</div>
+          <div class="muted" style="font-size:13px;margin-top:4px">Editor-in-chief · Hanoi</div>
+          <p style="font-size:14px;margin:12px 0 0;color:var(--muted)">Food writer, 12 years reporting on Vietnam's regional cuisines.</p>
+        </div>
+      </div>
+      <div class="profile-card">
+        <div class="avatar ph-solid-2"></div>
+        <div>
+          <div style="font-family:'Instrument Serif',serif;font-size:22px;line-height:1.2">Minh Trần</div>
+          <div class="muted" style="font-size:13px;margin-top:4px">Central coast editor · Hoi An</div>
+          <p style="font-size:14px;margin:12px 0 0;color:var(--muted)">Born and raised in Hoi An. Runs a Saturday market walk for readers.</p>
+        </div>
+      </div>
+      <div class="profile-card">
+        <div class="avatar ph-solid-3"></div>
+        <div>
+          <div style="font-family:'Instrument Serif',serif;font-size:22px;line-height:1.2">An Nguyễn</div>
+          <div class="muted" style="font-size:13px;margin-top:4px">Southern editor · Ho Chi Minh</div>
+          <p style="font-size:14px;margin:12px 0 0;color:var(--muted)">Former architecture critic. Answers all questions about District 3.</p>
+        </div>
+      </div>
+      <div class="profile-card">
+        <div class="avatar ph-solid-4"></div>
+        <div>
+          <div style="font-family:'Instrument Serif',serif;font-size:22px;line-height:1.2">Hoa Lê</div>
+          <div class="muted" style="font-size:13px;margin-top:4px">App lead · Hanoi</div>
+          <p style="font-size:14px;margin:12px 0 0;color:var(--muted)">Builds the offline city packs. Ex-Grab product.</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:48px">
+      <a href="/contributors/" class="ulink" style="font-size:15px">See all 47 contributors →</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+  }
+  .stat-cell {
+    background: var(--bg);
+    padding: 32px;
+  }
+</style>

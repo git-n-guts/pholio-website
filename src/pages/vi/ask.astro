@@ -1,0 +1,102 @@
+---
+// TODO-VI: review copy
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Đặt câu hỏi — Pholio"
+  description="Không tìm thấy câu hỏi của bạn về du lịch Việt Nam? Hỏi người địa phương. Biên tập đọc mọi bài gửi; các câu hay sẽ thành bài trong 2-3 tuần."
+  lang="vi"
+  schemaType="WebSite"
+>
+  <section class="max-page ptitle">
+    <div class="eyebrow" style="margin-top:24px">Hỏi người địa phương</div>
+    <h1 class="hero-h1" style="margin-top:16px">Không thấy câu hỏi của bạn?<br/><em>Hãy hỏi.</em></h1>
+    <p class="muted" style="max-width:620px;margin-top:24px;font-size:18px">Nếu chúng tôi chưa trả lời câu hỏi của bạn, gửi cho chúng tôi. Biên tập đọc mọi bài gửi; các câu hay sẽ thành bài xuất bản trong 2–3 tuần.</p>
+  </section>
+
+  <section class="max-page sec" style="padding-top:32px">
+    <div class="ask-grid">
+      <form method="post" action="/api/ask">
+        <div class="field">
+          <label for="a-q">Câu hỏi của bạn</label>
+          <textarea id="a-q" name="question" placeholder="ví dụ: Thị trấn ven biển nào ít đông người hơn Hội An vào tháng 5?"></textarea>
+        </div>
+        <div class="field">
+          <label for="a-city">Thành phố hoặc vùng</label>
+          <select id="a-city" name="city">
+            <option>Hà Nội</option>
+            <option>TP. Hồ Chí Minh</option>
+            <option>Hội An</option>
+            <option>Đà Nẵng</option>
+            <option>Sa Pa</option>
+            <option>Huế</option>
+            <option>Phú Quốc</option>
+            <option>Nha Trang</option>
+            <option>Toàn quốc / nhiều nơi</option>
+            <option>Nơi khác</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="a-cat">Chuyên mục</label>
+          <select id="a-cat" name="category">
+            <option>Ẩm thực</option>
+            <option>Di chuyển</option>
+            <option>Văn hoá</option>
+            <option>Chi phí</option>
+            <option>Chỗ ở</option>
+            <option>Hoạt động</option>
+            <option>An toàn</option>
+            <option>Thời tiết</option>
+            <option>Lên kế hoạch</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="a-ctx">Ngữ cảnh (tuỳ chọn)</label>
+          <textarea id="a-ctx" name="context" placeholder="Ngày đi, background của bạn, bất cứ điều gì giúp chúng tôi trả lời hữu ích hơn."></textarea>
+        </div>
+        <div class="field">
+          <label for="a-email">Email (tuỳ chọn)</label>
+          <input id="a-email" name="email" type="email" placeholder="Chúng tôi sẽ báo nếu câu hỏi của bạn thành bài viết."/>
+        </div>
+        <button type="submit" class="btn btn-acc" style="margin-top:16px">Gửi câu hỏi →</button>
+      </form>
+
+      <aside>
+        <div class="hairline-t hairline-b" style="padding:24px 0">
+          <div class="eyebrow" style="margin-bottom:12px">Câu hỏi hay là gì?</div>
+          <ul style="list-style:none;padding:0;margin:0;font-size:14px;line-height:1.7">
+            <li class="hairline-b" style="padding:10px 0">Cụ thể chứ không chung chung</li>
+            <li class="hairline-b" style="padding:10px 0">Về một nơi, một thời điểm, hoặc một quyết định</li>
+            <li class="hairline-b" style="padding:10px 0">Không thể search Google ra trong 5 giây</li>
+            <li style="padding:10px 0">Điều người địa phương sẽ có quan điểm</li>
+          </ul>
+        </div>
+        <div style="margin-top:24px">
+          <div class="eyebrow" style="margin-bottom:8px">Phản hồi trung bình</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:48px;line-height:1">18 giờ</div>
+          <p class="muted" style="font-size:13px;margin-top:8px">Với người đăng ký app Pholio</p>
+        </div>
+        <div style="margin-top:32px">
+          <div class="eyebrow" style="margin-bottom:8px">Tỷ lệ thành bài</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:48px;line-height:1">~22%</div>
+          <p class="muted" style="font-size:13px;margin-top:8px">Trở thành bài biên tập đầy đủ</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ask-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+  @media (min-width: 900px) {
+    .ask-grid {
+      grid-template-columns: 1fr 300px;
+      gap: 96px;
+    }
+  }
+</style>

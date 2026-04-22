@@ -1,8 +1,6 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
-import AnswerBox from '@components/AnswerBox.astro';
-import QuestionCard from '@components/QuestionCard.astro';
 
 export async function getStaticPaths() {
   const allQuestions = await getCollection('questions', ({ data, id }) => {
@@ -20,25 +18,25 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await render(entry);
 const { data } = entry;
 
 const categoryLabels: Record<string, string> = {
-  food: 'Ẩm thực',
-  transport: 'Di chuyển',
-  culture: 'Văn hoá',
-  weather: 'Thời tiết',
-  budget: 'Chi phí',
-  safety: 'An toàn',
-  planning: 'Lên kế hoạch',
-  activities: 'Hoạt động',
-  accommodation: 'Chỗ ở',
+  food: 'Ẩm thực', transport: 'Di chuyển', culture: 'Văn hoá', weather: 'Thời tiết',
+  budget: 'Chi phí', safety: 'An toàn', planning: 'Lên kế hoạch',
+  activities: 'Hoạt động', accommodation: 'Chỗ ở',
 };
+
+const tocHeadings = headings.filter((h) => h.depth === 2);
 
 const allQuestions = await getCollection('questions', ({ data: d, id }) => {
   return !d.draft && id.startsWith('vi/') && d.city === data.city && d.canonicalSlug !== data.canonicalSlug;
 });
 const related = allQuestions.slice(0, 3);
+
+const questionNum = String(
+  Math.abs(data.canonicalSlug.split('').reduce((a, c) => a + c.charCodeAt(0), 0)) % 999
+).padStart(3, '0');
 ---
 
 <BaseLayout
@@ -54,90 +52,160 @@ const related = allQuestions.slice(0, 3);
   faq={data.faq}
   keywords={data.keywords}
 >
-  <article class="max-page" style="padding-top:48px;padding-bottom:96px">
-    <nav class="crumb" aria-label="Breadcrumb" style="margin-bottom:32px">
-      <a href="/vi/">Việt Nam</a>
-      <span class="sep">/</span>
-      <a href={`/vi/cities/${data.city}/`}>{data.cityDisplay}</a>
-      <span class="sep">/</span>
-      <span class="cur">{categoryLabels[data.category]}</span>
+  <div class="max-page" style="padding-top:40px">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/vi/">VIỆT NAM</a>
+      <span class="sep">→</span>
+      <a href={`/vi/cities/${data.city}/`}>{data.cityDisplay.toUpperCase()}</a>
+      <span class="sep">→</span>
+      <a href={`/vi/categories/${data.category}/`}>{categoryLabels[data.category].toUpperCase()}</a>
     </nav>
+  </div>
 
-    <div class="max-prose">
+  <div class="max-page art-wrap">
+    <aside class="art-rail">
+      <div class="eyebrow" style="margin-bottom:12px">Câu số</div>
+      <div style="font-family:'Instrument Serif',serif;font-size:64px;line-height:1;color:var(--muted)">{questionNum}</div>
+      <div class="eyebrow" style="margin-top:32px;margin-bottom:12px">Thuộc</div>
+      <div class="tag-list">
+        <a href={`/vi/categories/${data.category}/`} class="chip" style="padding:4px 10px;font-size:12px">{categoryLabels[data.category]}</a>
+        <a href={`/vi/cities/${data.city}/`} class="chip" style="padding:4px 10px;font-size:12px">{data.cityDisplay}</a>
+      </div>
+      {data.contributors.length > 0 && (
+        <>
+          <div class="eyebrow" style="margin-top:32px;margin-bottom:12px">Đóng góp</div>
+          <div style="font-size:13px;line-height:1.6;color:var(--muted)">
+            {data.contributors.map((c) => <div>{c}</div>)}
+          </div>
+        </>
+      )}
+    </aside>
+
+    <article class="max-prose" style="margin:0 auto;width:100%">
       <header style="margin-bottom:48px">
-        <div class="cat-tag" style="margin-bottom:16px">{categoryLabels[data.category]}</div>
-        <h1 style="font-size:clamp(36px,5vw,56px);line-height:1.1;letter-spacing:-.015em;margin-bottom:24px">
+        <h1 style="font-size:clamp(40px,6vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:32px">
           {data.title}
         </h1>
-        <div class="muted" style="display:flex;gap:16px;flex-wrap:wrap;font-size:14px">
+        <div class="muted hairline-b" style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;font-size:14px;padding-bottom:24px">
           <span>
-            <time datetime={data.pubDate.toISOString()}>
-              {data.pubDate.toLocaleDateString('vi-VN', { day: 'numeric', month: 'long', year: 'numeric' })}
+            {data.updatedDate ? 'Cập nhật ' : 'Đăng '}
+            <time datetime={(data.updatedDate || data.pubDate).toISOString()}>
+              {(data.updatedDate || data.pubDate).toLocaleDateString('vi-VN', { day: 'numeric', month: 'long', year: 'numeric' })}
             </time>
           </span>
-          {data.updatedDate && (
-            <span>
-              · Cập nhật <time datetime={data.updatedDate.toISOString()}>
-                {data.updatedDate.toLocaleDateString('vi-VN', { day: 'numeric', month: 'long', year: 'numeric' })}
-              </time>
-            </span>
-          )}
-          <span>· đọc {data.readingTime} phút</span>
+          <span style="opacity:.3">·</span>
+          <span>đọc {data.readingTime} phút</span>
           {data.contributors.length > 0 && (
-            <span>· Đóng góp bởi {data.contributors.length} người địa phương</span>
+            <>
+              <span style="opacity:.3">·</span>
+              <span style="display:inline-flex;align-items:center;gap:8px">
+                <span style="display:flex">
+                  <span class="avatar ph-solid-2" style="width:20px;height:20px;border:2px solid var(--bg);margin-right:-6px"></span>
+                  <span class="avatar ph-solid-3" style="width:20px;height:20px;border:2px solid var(--bg);margin-right:-6px"></span>
+                  <span class="avatar ph-solid-1" style="width:20px;height:20px;border:2px solid var(--bg)"></span>
+                </span>
+                Đóng góp bởi {data.contributors.length} người địa phương
+              </span>
+            </>
           )}
         </div>
       </header>
 
-      <AnswerBox lang="vi">
-        <Fragment set:html={data.quickAnswer} />
-      </AnswerBox>
+      <div class="answer-box" style="margin-bottom:56px" aria-label="Trả lời nhanh">
+        <div class="lbl">Trả lời nhanh</div>
+        <p set:html={data.quickAnswer}></p>
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(194,65,12,.2);display:flex;justify-content:space-between;font-size:12px">
+          <span class="mono muted">
+            ĐÃ XÁC THỰC · {(data.updatedDate || data.pubDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase()}
+          </span>
+          <span class="acc" style="font-weight:500">Đọc tiếp ↓</span>
+        </div>
+      </div>
 
-      <div class="prose-ed" style="margin-top:48px">
+      <div class="prose-ed">
         <Content />
       </div>
 
-      <aside class="callout" style="margin-top:56px;background:var(--warmpaper)">
-        <div class="eyebrow" style="margin-bottom:8px">§ Trong ứng dụng</div>
-        <p style="font-family:'Instrument Serif',Georgia,serif;font-size:22px;line-height:1.3;margin:0 0 16px">
-          Lưu câu trả lời này offline, kèm bản đồ, địa chỉ và ghi chú địa phương.
+      <aside style="margin:64px 0;padding:32px;border-left:4px solid var(--ink);background:var(--warmpaper)">
+        <div class="eyebrow" style="margin-bottom:12px">Ứng dụng Pholio</div>
+        <p style="font-family:'Instrument Serif',serif;font-size:24px;line-height:1.3;margin:0 0 16px">
+          Đem câu trả lời này <em>offline</em>, kèm địa chỉ, giá cả, và giờ mở cửa trong ứng dụng Pholio.
         </p>
-        <a href="/vi/app/" class="btn btn-acc">Tải Pholio →</a>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;font-size:14px;align-items:center">
+          <a href="/vi/app/" class="ulink" style="font-weight:500">iOS →</a>
+          <a href="/vi/app/" class="ulink" style="font-weight:500">Android →</a>
+          <span class="mono muted" style="font-size:12px">Miễn phí · Không cần tài khoản</span>
+        </div>
       </aside>
 
       {data.faq && data.faq.length > 0 && (
-        <section style="margin-top:80px">
-          <h2 style="font-size:32px;margin-bottom:24px">Các câu liên quan</h2>
+        <section style="margin-top:64px">
+          <div class="eyebrow" style="margin-bottom:12px">Cũng được hỏi</div>
+          <h2 style="font-size:36px;line-height:1.1;margin-bottom:32px">Các câu liên quan, đã trả lời.</h2>
           {data.faq.map((item) => (
             <details>
               <summary>
                 <span>{item.q}</span>
                 <span class="plus" aria-hidden="true"></span>
               </summary>
-              <div class="answer" set:html={item.a} />
+              <div class="answer" set:html={item.a}></div>
             </details>
           ))}
         </section>
       )}
-    </div>
 
-    {related.length > 0 && (
-      <section style="margin-top:96px;padding-top:48px;border-top:1px solid var(--border)">
-        <div class="eyebrow" style="margin-bottom:24px">Thêm về {data.cityDisplay}</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 64px">
-          {related.map((r) => (
-            <QuestionCard
-              href={`/vi/questions/${r.data.canonicalSlug}/`}
-              category={categoryLabels[r.data.category]}
-              city={r.data.cityDisplay}
-              readingTime={r.data.readingTime}
-              title={r.data.title}
-              preview={r.data.description}
-              variant="grid"
-            />
-          ))}
+      {related.length > 0 && (
+        <section style="margin-top:80px">
+          <div class="eyebrow" style="margin-bottom:24px">Đọc tiếp</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px">
+            {related.map((r) => (
+              <a href={`/vi/questions/${r.data.canonicalSlug}/`} class="hub-card">
+                <div class="cat-tag" style="margin-bottom:8px">{categoryLabels[r.data.category]}</div>
+                <h3 style="font-size:20px;line-height:1.2">{r.data.title}</h3>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </article>
+
+    <aside class="art-toc">
+      <div style="position:sticky;top:90px" class="toc">
+        {tocHeadings.length > 0 && (
+          <>
+            <div class="eyebrow" style="margin-bottom:16px">Trong bài</div>
+            {tocHeadings.map((h) => (
+              <a href={`#${h.slug}`}>{h.text}</a>
+            ))}
+          </>
+        )}
+        <div class="hairline-t" style="margin-top:32px;padding-top:16px">
+          <a href={`/questions/${data.canonicalSlug}/`} class="ulink-acc" style="font-size:14px">Read in English →</a>
         </div>
-      </section>
-    )}
-  </article>
+      </div>
+    </aside>
+  </div>
 </BaseLayout>
+
+<style>
+  .art-wrap {
+    padding-top: 32px;
+    padding-bottom: 96px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .art-rail,
+  .art-toc {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .art-wrap {
+      grid-template-columns: 220px 1fr 220px;
+    }
+    .art-rail,
+    .art-toc {
+      display: block;
+    }
+  }
+</style>

@@ -1,0 +1,125 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const categoryLabels: Record<string, string> = {
+  food: 'Ẩm thực',
+  transport: 'Di chuyển',
+  culture: 'Văn hoá',
+  weather: 'Thời tiết',
+  budget: 'Chi phí',
+  safety: 'An toàn',
+  planning: 'Lên kế hoạch',
+  activities: 'Hoạt động',
+  accommodation: 'Chỗ ở',
+};
+
+const all = await getCollection('questions', ({ data, id }) => {
+  return !data.draft && id.startsWith('vi/');
+});
+
+const grouped = all.reduce<Record<string, typeof all>>((acc, q) => {
+  const firstLetter = q.data.title.charAt(0).toUpperCase();
+  if (!acc[firstLetter]) acc[firstLetter] = [];
+  acc[firstLetter].push(q);
+  return acc;
+}, {});
+
+const sortedLetters = Object.keys(grouped).sort();
+
+const categories = [
+  { slug: 'food', label: 'Ẩm thực', count: all.filter((q) => q.data.category === 'food').length },
+  { slug: 'transport', label: 'Di chuyển', count: all.filter((q) => q.data.category === 'transport').length },
+  { slug: 'culture', label: 'Văn hoá', count: all.filter((q) => q.data.category === 'culture').length },
+  { slug: 'budget', label: 'Chi phí', count: all.filter((q) => q.data.category === 'budget').length },
+  { slug: 'accommodation', label: 'Chỗ ở', count: all.filter((q) => q.data.category === 'accommodation').length },
+  { slug: 'safety', label: 'An toàn', count: all.filter((q) => q.data.category === 'safety').length },
+  { slug: 'weather', label: 'Thời tiết', count: all.filter((q) => q.data.category === 'weather').length },
+  { slug: 'planning', label: 'Lên kế hoạch', count: all.filter((q) => q.data.category === 'planning').length },
+];
+---
+
+<BaseLayout
+  title="Tất cả câu hỏi — Pholio"
+  description={`Mọi câu trả lời về du lịch Việt Nam. Duyệt ${all.length} câu hỏi theo thành phố, chuyên mục, hoặc bảng chữ cái.`}
+  lang="vi"
+  schemaType="CollectionPage"
+>
+  <section class="max-page ptitle">
+    <nav class="crumb"><a href="/vi/">PHOLIO</a><span class="sep">→</span><span class="cur">CÂU HỎI</span></nav>
+    <div class="eyebrow" style="margin-top:24px">{all.length} đã trả lời · Cập nhật hàng tuần</div>
+    <h1 class="hero-h1" style="margin-top:16px">Mọi câu hỏi,<br/><em>tất cả câu trả lời.</em></h1>
+
+    <div style="margin-top:48px;max-width:780px">
+      <form method="get" action="/vi/search/" role="search">
+        <div class="search-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="m20 20-3.5-3.5"/>
+          </svg>
+          <input class="search-input" type="search" name="q" placeholder={`Tìm trong ${all.length} câu hỏi…`}/>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="max-page hairline-t hairline-b" style="padding:20px 24px;position:sticky;top:68px;background:var(--bg);z-index:30">
+    <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:center">
+      <div style="display:flex;gap:8px;overflow-x:auto;align-items:center">
+        <span class="eyebrow" style="flex-shrink:0">Chuyên mục</span>
+        <button class="tab is-active">Tất cả · {all.length}</button>
+        {categories.map((c) => (
+          c.count > 0 && <a href={`/vi/categories/${c.slug}/`} class="tab">{c.label} · {c.count}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="max-page sec">
+    <div style="max-width:1000px">
+      {sortedLetters.length === 0 ? (
+        <p class="muted" style="padding:48px 0">Chưa có câu hỏi nào được đăng.</p>
+      ) : (
+        sortedLetters.map((letter) => (
+          <div class="hairline-b letter-row">
+            <div class="letter">{letter}</div>
+            <div>
+              {grouped[letter].map((q, i) => (
+                <a
+                  href={`/vi/questions/${q.data.canonicalSlug}/`}
+                  class="q-card"
+                  style={i === 0 ? 'padding-top:0;border-top:none' : ''}
+                >
+                  <div class="meta">
+                    <span class="cat-tag">{categoryLabels[q.data.category]}</span>
+                    <span class="muted" style="font-size:12px">{q.data.cityDisplay} · {q.data.readingTime} phút</span>
+                  </div>
+                  <h3 style="font-size:22px;line-height:1.2">{q.data.title}</h3>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      )}
+
+      <div style="padding:64px 0;text-align:center">
+        <a href="/vi/ask/" class="btn btn-ghost">Không tìm thấy câu hỏi? Hãy hỏi →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .letter-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 48px;
+    padding: 32px 0;
+  }
+  .letter {
+    font-family: 'Instrument Serif', serif;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--muted);
+  }
+</style>

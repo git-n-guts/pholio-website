@@ -1,0 +1,125 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const categories = [
+    { slug: 'food', label: 'Ẩm thực', description: 'Người địa phương ăn gì, tìm phiên bản thật ở đâu, và bỏ qua gì.' },
+    { slug: 'transport', label: 'Di chuyển', description: 'Làm sao đến, đi lại trong thành phố, và tránh bị chặt chém.' },
+    { slug: 'culture', label: 'Văn hoá', description: 'Lễ hội, phép xã giao, truyền thống, và những gì không nên chụp ảnh.' },
+    { slug: 'weather', label: 'Thời tiết', description: 'Hướng dẫn đi theo tháng cho từng vùng.' },
+    { slug: 'budget', label: 'Chi phí', description: 'Chi phí một ngày thực tế theo mức chi tiêu và thành phố.' },
+    { slug: 'safety', label: 'An toàn', description: 'Các vấn đề thực tế, chiêu lừa, và đánh giá rủi ro trung thực.' },
+    { slug: 'planning', label: 'Lên kế hoạch', description: 'Lịch trình, thời gian chuyến đi, và các quyết định logistic.' },
+    { slug: 'activities', label: 'Hoạt động', description: 'Những gì đáng làm, và những gì bán quá giá cho khách du lịch.' },
+    { slug: 'accommodation', label: 'Chỗ ở', description: 'Ở đâu, theo khu và phong cách du lịch.' },
+  ];
+
+  return categories.map((cat) => ({
+    params: { slug: cat.slug },
+    props: cat,
+  }));
+}
+
+interface Props {
+  slug: string;
+  label: string;
+  description: string;
+}
+
+const { slug, label, description } = Astro.props;
+
+const categoryLabels: Record<string, string> = {
+  food: 'Ẩm thực', transport: 'Di chuyển', culture: 'Văn hoá', weather: 'Thời tiết',
+  budget: 'Chi phí', safety: 'An toàn', planning: 'Lên kế hoạch',
+  activities: 'Hoạt động', accommodation: 'Chỗ ở',
+};
+
+const questions = await getCollection('questions', ({ data, id }) => {
+  return !data.draft && id.startsWith('vi/') && data.category === slug;
+});
+
+const byCity = questions.reduce<Record<string, typeof questions>>((acc, q) => {
+  const city = q.data.cityDisplay;
+  if (!acc[city]) acc[city] = [];
+  acc[city].push(q);
+  return acc;
+}, {});
+
+const cities = Object.keys(byCity).sort();
+---
+
+<BaseLayout
+  title={`Câu hỏi về ${label.toLowerCase()} du lịch Việt Nam — Pholio`}
+  description={`${description} ${questions.length} câu hỏi đã trả lời khắp Việt Nam.`}
+  lang="vi"
+  canonicalSlug={`categories-${slug}`}
+  schemaType="CollectionPage"
+>
+  <section class="max-page ptitle">
+    <nav class="crumb">
+      <a href="/vi/">PHOLIO</a>
+      <span class="sep">→</span>
+      <a href="/vi/questions/">CÂU HỎI</a>
+      <span class="sep">→</span>
+      <span class="cur">{label.toUpperCase()}</span>
+    </nav>
+    <div class="eyebrow acc" style="margin-top:24px">Chuyên mục</div>
+    <h1 class="hero-h1" style="margin-top:16px">{label}<span class="muted">.</span></h1>
+    <p class="muted" style="max-width:620px;margin-top:24px;font-size:18px">{description}</p>
+    <div class="muted" style="margin-top:16px;font-size:14px">{questions.length} câu hỏi · {cities.length} thành phố</div>
+  </section>
+
+  <section class="max-page sec">
+    {questions.length === 0 ? (
+      <div style="max-width:680px">
+        <p class="muted" style="font-size:18px">Chưa có câu hỏi nào trong chuyên mục này. Quay lại sau, hoặc <a href="/vi/ask/" class="ulink">hãy hỏi</a>.</p>
+      </div>
+    ) : (
+      <div style="max-width:1000px">
+        {cities.map((city) => (
+          <div class="hairline-b city-row">
+            <div class="city-header">
+              <div class="eyebrow">{city}</div>
+              <div class="muted" style="font-size:13px;margin-top:4px">{byCity[city].length} câu hỏi</div>
+            </div>
+            <div>
+              {byCity[city].map((q, i) => (
+                <a
+                  href={`/vi/questions/${q.data.canonicalSlug}/`}
+                  class="q-card"
+                  style={i === 0 ? 'padding-top:0;border-top:none' : ''}
+                >
+                  <div class="meta">
+                    <span class="cat-tag">{categoryLabels[q.data.category]}</span>
+                    <span class="muted" style="font-size:12px">{q.data.readingTime} phút</span>
+                  </div>
+                  <h3 style="font-size:22px;line-height:1.2;margin-bottom:8px">{q.data.title}</h3>
+                  <p class="muted" style="font-size:14px;margin:0">{q.data.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .city-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 32px 0;
+  }
+  @media (min-width: 900px) {
+    .city-row {
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+    }
+  }
+  .city-header {
+    padding-top: 8px;
+  }
+</style>

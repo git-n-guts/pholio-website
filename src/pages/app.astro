@@ -1,0 +1,73 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Pholio app — Every answer, offline, in your pocket"
+  description="Download Pholio for iOS and Android. Offline city packs, ask-a-local, phrasebook with audio. Simple pricing from free to $4.99/month."
+  lang="en"
+  schemaType="WebSite"
+>
+  <section class="max-page ptitle" style="padding-bottom:80px">
+    <div class="eyebrow" style="margin-top:24px">Pholio for iOS &amp; Android</div>
+    <h1 class="hero-h1" style="margin-top:16px">Every answer,<br/><em>in your pocket. Offline.</em></h1>
+    <p class="muted" style="max-width:560px;margin-top:24px;font-size:18px">Download city packs before you go. No data roaming, no spotty hotel Wi-Fi, no hunting for Wi-Fi to check an opening hour.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:40px">
+      <a href="#" class="store-badge"><span style="display:flex;flex-direction:column"><span class="sub">Download on the</span><span class="main">App Store</span></span></a>
+      <a href="#" class="store-badge alt"><span style="display:flex;flex-direction:column"><span class="sub">Get it on</span><span class="main">Google Play</span></span></a>
+    </div>
+  </section>
+
+  <section class="max-page" style="padding-bottom:96px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+      <div class="ph-stripes" style="aspect-ratio:9/19">[ screen.home ]</div>
+      <div class="ph-stripes" style="aspect-ratio:9/19">[ screen.answer ]</div>
+      <div class="ph-stripes" style="aspect-ratio:9/19">[ screen.map ]</div>
+      <div class="ph-stripes" style="aspect-ratio:9/19">[ screen.ask_local ]</div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="max-page sec">
+    <div class="sec-head">
+      <div class="eyebrow" style="margin-bottom:16px">§ · What it does</div>
+      <h2 class="display-h2">Four things, done well.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:48px 64px">
+      <div><div class="mono muted" style="font-size:12px;margin-bottom:16px">01</div><h3 style="font-size:28px;line-height:1.15;margin-bottom:12px">Offline city packs</h3><p class="muted" style="font-size:15px;margin:0">Download Hoi An, Hanoi, or Saigon — questions, maps, addresses, hours, cached.</p></div>
+      <div><div class="mono muted" style="font-size:12px;margin-bottom:16px">02</div><h3 style="font-size:28px;line-height:1.15;margin-bottom:12px">Ask a local</h3><p class="muted" style="font-size:15px;margin:0">Can't find your question answered? Send it to a real contributor. Average reply in 18 hours.</p></div>
+      <div><div class="mono muted" style="font-size:12px;margin-bottom:16px">03</div><h3 style="font-size:28px;line-height:1.15;margin-bottom:12px">Phrasebook with audio</h3><p class="muted" style="font-size:15px;margin:0">Native Vietnamese pronunciations for 200+ travel phrases. Works offline.</p></div>
+      <div><div class="mono muted" style="font-size:12px;margin-bottom:16px">04</div><h3 style="font-size:28px;line-height:1.15;margin-bottom:12px">Saved answers, synced</h3><p class="muted" style="font-size:15px;margin:0">Bookmark on the web, read on the plane. Syncs across devices when you're online.</p></div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="max-page sec">
+    <div class="sec-head">
+      <div class="eyebrow" style="margin-bottom:16px">§ · Pricing</div>
+      <h2 class="display-h2">Simple.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border)">
+      <div style="background:var(--bg);padding:40px">
+        <div class="eyebrow" style="margin-bottom:16px">Free</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:56px;line-height:1">$0</div>
+        <p class="muted" style="font-size:14px;margin:16px 0 24px">Browse all answers online, save up to 10 offline.</p>
+        <a href="#" class="btn btn-ghost" style="font-size:14px">Download →</a>
+      </div>
+      <div style="background:var(--warmpaper);padding:40px;position:relative">
+        <div class="eyebrow acc" style="margin-bottom:16px">Traveler · most chosen</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:56px;line-height:1">$4.99<span class="muted" style="font-size:18px"> / month</span></div>
+        <p class="muted" style="font-size:14px;margin:16px 0 24px">Unlimited offline packs, ask-a-local, phrasebook.</p>
+        <a href="#" class="btn btn-acc" style="font-size:14px">Subscribe →</a>
+      </div>
+      <div style="background:var(--bg);padding:40px">
+        <div class="eyebrow" style="margin-bottom:16px">Annual</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:56px;line-height:1">$39<span class="muted" style="font-size:18px"> / year</span></div>
+        <p class="muted" style="font-size:14px;margin:16px 0 24px">Same as Traveler, paid once. Two months free.</p>
+        <a href="#" class="btn btn-ghost" style="font-size:14px">Subscribe →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

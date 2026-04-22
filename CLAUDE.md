@@ -126,9 +126,20 @@ When the user asks to create a new question:
 ```bash
 npm install          # first time only
 npm run dev          # local dev on http://localhost:4321
-npm run build        # validates schemas + generates static site to dist/
+npm run build        # astro build + pagefind index → dist/
 npm run preview      # preview production build locally
 ```
+
+## Search (Pagefind)
+
+Search is powered by Pagefind — a static search library that indexes at build time.
+
+- `npm run build` automatically runs `pagefind --site dist` after Astro build
+- Index lives at `dist/pagefind/` (committed to nothing, generated every build)
+- Search page loads `/pagefind/pagefind-ui.js` at runtime
+- **In dev mode (`npm run dev`)**: search page will show but results won't load because pagefind index doesn't exist yet. Run `npm run build && npm run preview` to test search locally.
+- Content indexed per page is the `<main data-pagefind-body>` element (header/footer excluded)
+- Article pages have `data-pagefind-filter` attributes for category filtering
 
 Cloudflare Pages auto-deploys from `main` branch. Build output: `dist/`. Node version: 20.
 

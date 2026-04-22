@@ -1,0 +1,40 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Not found — Pholio"
+  description="The question you asked for isn't at this address."
+  lang="en"
+  schemaType="WebSite"
+>
+  <section class="max-page" style="padding:120px 24px 96px;text-align:left">
+    <div class="four04-num">404<span class="acc">.</span></div>
+    <div class="eyebrow acc" style="margin-top:32px">Page not found</div>
+    <h1 style="font-family:'Instrument Serif',serif;font-size:clamp(36px,5vw,56px);line-height:1.1;margin-top:16px;max-width:680px">The question you asked for isn't at this address.</h1>
+    <p class="muted" style="max-width:520px;margin-top:24px;font-size:18px">It may have moved, been retitled, or never existed. Try searching — or start from one of the cities below.</p>
+
+    <div style="margin-top:48px;display:flex;flex-wrap:wrap;gap:12px">
+      <a href="/" class="btn">Back home →</a>
+      <a href="/questions/" class="btn btn-ghost">Browse all questions</a>
+    </div>
+
+    <div class="hairline-t" style="margin-top:96px;padding-top:48px">
+      <div class="eyebrow" style="margin-bottom:24px">Most-read this week</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;max-width:1000px">
+        <a href="/questions/must-try-dishes-hoi-an/" class="hub-card">
+          <div class="cat-tag" style="margin-bottom:8px">Food · Hoi An</div>
+          <h3>What are the must-try dishes in Hoi An?</h3>
+        </a>
+        <a href="/questions/" class="hub-card">
+          <div class="cat-tag" style="margin-bottom:8px">Transport · Hanoi</div>
+          <h3>How do I get from Hanoi to Sapa?</h3>
+        </a>
+        <a href="/questions/" class="hub-card">
+          <div class="cat-tag" style="margin-bottom:8px">Budget</div>
+          <h3>What does a realistic daily budget look like?</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

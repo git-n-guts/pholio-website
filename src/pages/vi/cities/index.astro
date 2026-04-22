@@ -1,0 +1,67 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CityCard from '@components/CityCard.astro';
+
+const otherCities = [
+  { name: 'Hà Nội', region: 'Bắc · Thủ đô', questionCount: 54, href: '/vi/cities/hanoi/' },
+  { name: 'TP. Hồ Chí Minh', region: 'Nam · Đô thị', questionCount: 67, href: '/vi/cities/ho-chi-minh/' },
+  { name: 'Đà Nẵng', region: 'Trung · Ven biển', questionCount: 31, href: '/vi/cities/da-nang/' },
+  { name: 'Sa Pa', region: 'Tây Bắc · Vùng cao', questionCount: 22, href: '/vi/cities/sapa/' },
+  { name: 'Huế', region: 'Trung · Cố đô', questionCount: 19, href: '/vi/cities/hue/' },
+  { name: 'Phú Quốc', region: 'Đảo · Phía Nam', questionCount: 27, href: '/vi/cities/phu-quoc/' },
+  { name: 'Nha Trang', region: 'Ven biển · Nghỉ dưỡng', questionCount: 18, href: '/vi/cities/nha-trang/' },
+];
+
+const comingSoon = ['Mai Châu', 'Ninh Bình', 'Hà Giang', 'Côn Đảo', 'Đà Lạt'];
+---
+
+<BaseLayout
+  title="Thành phố — Pholio"
+  description="Tám điểm đến Việt Nam, viết cẩn thận. Mỗi thành phố dưới đây có đội biên tập riêng trả lời câu hỏi độc giả."
+  lang="vi"
+  schemaType="CollectionPage"
+>
+  <section class="max-page ptitle">
+    <nav class="crumb"><a href="/vi/">PHOLIO</a><span class="sep">→</span><span class="cur">THÀNH PHỐ</span></nav>
+    <div class="eyebrow" style="margin-top:24px">Tất cả điểm đến · 8</div>
+    <h1 class="hero-h1" style="margin-top:16px">Tám điểm đến,<br/><em>viết cẩn thận.</em></h1>
+    <p class="muted" style="max-width:560px;margin-top:24px;font-size:18px">Mỗi thành phố dưới đây có đội biên tập riêng trả lời câu hỏi độc giả. Chọn nơi bạn sắp đi và bắt đầu từ đó.</p>
+  </section>
+
+  <section class="max-page hairline-t hairline-b" style="padding:20px 24px">
+    <div style="display:flex;gap:12px;overflow-x:auto;align-items:center">
+      <span class="eyebrow" style="flex-shrink:0">Vùng</span>
+      <button class="tab is-active">Tất cả</button>
+      <button class="tab">Bắc</button>
+      <button class="tab">Trung</button>
+      <button class="tab">Nam</button>
+      <button class="tab">Đảo</button>
+    </div>
+  </section>
+
+  <section class="max-page sec">
+    <div style="display:grid;grid-template-columns:1fr;gap:48px">
+      <a href="/vi/cities/hoi-an/" class="city-card feat" style="aspect-ratio:auto;padding:48px;display:grid;grid-template-columns:1fr;gap:24px">
+        <div>
+          <div class="eyebrow acc">Nổi bật · Tháng 4/2026</div>
+          <div class="city-name" style="font-size:clamp(56px,8vw,96px);margin-top:16px">Hội An</div>
+          <p class="muted" style="max-width:460px;margin-top:16px;font-size:16px">Phố lồng đèn. 48 câu hỏi đã trả lời bao gồm ẩm thực, di chuyển, văn hoá, chi phí, và chỗ ở — cập nhật gần đây.</p>
+        </div>
+        <div class="ph-stripes" style="height:200px">[ hoi_an.editorial_illustration ]</div>
+      </a>
+
+      <div class="city-grid">
+        {otherCities.map((c) => <CityCard {...c} lang="vi" />)}
+      </div>
+
+      <div class="hairline-t" style="padding-top:32px">
+        <div class="eyebrow" style="margin-bottom:8px">Sắp có</div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:16px">
+          {comingSoon.map((name) => (
+            <span class="chip" style="opacity:.6">{name}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

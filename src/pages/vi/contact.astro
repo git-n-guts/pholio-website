@@ -1,0 +1,82 @@
+---
+// TODO-VI: Translate labels and copy if needed
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Liên hệ — Pholio"
+  description="Liên hệ với Pholio. Biên tập, hỗ trợ ứng dụng, báo chí, hoặc địa chỉ văn phòng."
+  lang="vi"
+  schemaType="WebSite"
+>
+  <section class="max-page ptitle">
+    <div class="eyebrow" style="margin-top:24px">Liên hệ</div>
+    <h1 class="hero-h1" style="margin-top:16px">Gửi tin cho chúng tôi.</h1>
+  </section>
+
+  <section class="max-page sec">
+    <div class="contact-grid">
+      <aside>
+        <div style="margin-bottom:32px">
+          <div class="eyebrow" style="margin-bottom:8px">Biên tập</div>
+          <a href="mailto:editors@pholio.co" class="ulink">editors@pholio.co</a>
+          <p class="muted" style="font-size:13px;margin-top:8px">Hiệu đính, kiểm tra thông tin, đề xuất bài.</p>
+        </div>
+        <div style="margin-bottom:32px">
+          <div class="eyebrow" style="margin-bottom:8px">Hỗ trợ ứng dụng</div>
+          <a href="mailto:app@pholio.co" class="ulink">app@pholio.co</a>
+          <p class="muted" style="font-size:13px;margin-top:8px">Báo lỗi, câu hỏi về gói đăng ký.</p>
+        </div>
+        <div style="margin-bottom:32px">
+          <div class="eyebrow" style="margin-bottom:8px">Báo chí</div>
+          <a href="mailto:press@pholio.co" class="ulink">press@pholio.co</a>
+        </div>
+        <div class="hairline-t" style="padding-top:24px">
+          <div class="eyebrow" style="margin-bottom:8px">Văn phòng</div>
+          <p style="font-size:14px;margin:0;line-height:1.5">14 Nguyễn Quang Bích<br/>Hoàn Kiếm, Hà Nội<br/>Việt Nam</p>
+        </div>
+      </aside>
+
+      <form method="post" action="/api/contact">
+        <div class="field">
+          <label for="c-topic">Chủ đề</label>
+          <select id="c-topic" name="topic">
+            <option>Chung</option>
+            <option>Đề xuất câu hỏi</option>
+            <option>Đính chính</option>
+            <option>Yêu cầu báo chí</option>
+            <option>Hỗ trợ ứng dụng</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="c-name">Tên bạn</label>
+          <input id="c-name" name="name" type="text"/>
+        </div>
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email"/>
+        </div>
+        <div class="field">
+          <label for="c-message">Tin nhắn</label>
+          <textarea id="c-message" name="message"></textarea>
+        </div>
+        <button type="submit" class="btn" style="margin-top:16px">Gửi tin nhắn →</button>
+        <p class="muted" style="font-size:13px;margin-top:16px">Thường phản hồi trong 2 ngày làm việc.</p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+  @media (min-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 300px 1fr;
+      gap: 96px;
+    }
+  }
+</style>

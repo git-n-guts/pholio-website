@@ -1,0 +1,219 @@
+---
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const cities = await getCollection('cities');
+  return cities.map((city) => ({
+    params: { slug: city.slug },
+    props: { city },
+  }));
+}
+
+interface Props {
+  city: CollectionEntry<'cities'>;
+}
+
+const { city } = Astro.props;
+const { data } = city;
+const citySlug = city.slug;
+
+const categoryLabels: Record<string, string> = {
+  food: 'Food', transport: 'Transport', culture: 'Culture', weather: 'Weather',
+  budget: 'Budget', safety: 'Safety', planning: 'Planning',
+  activities: 'Activities', accommodation: 'Stay',
+};
+
+// Get all questions for this city
+const questions = await getCollection('questions', ({ data: d, id }) => {
+  return !d.draft && id.startsWith('en/') && d.city === citySlug;
+});
+
+// Group questions by category
+const byCategory = questions.reduce<Record<string, typeof questions>>((acc, q) => {
+  if (!acc[q.data.category]) acc[q.data.category] = [];
+  acc[q.data.category].push(q);
+  return acc;
+}, {});
+
+// Order categories
+const categoryOrder = ['food', 'transport', 'culture', 'accommodation', 'activities', 'budget', 'safety', 'weather', 'planning'];
+const orderedCategories = categoryOrder.filter((c) => byCategory[c]);
+
+const categoryDescriptions: Record<string, string> = {
+  food: 'What locals actually eat, where to find real versions, and what to skip. Updated weekly.',
+  transport: 'How to get in, how to get around, and how not to get ripped off at the taxi rank.',
+  culture: 'The lanterns, festivals, old tailors, and things not to photograph.',
+  budget: 'Realistic daily costs and what to expect price-wise.',
+  accommodation: 'Where to sleep, by neighborhood and travel style.',
+  activities: 'Things worth doing, and things oversold.',
+  safety: 'Practical concerns and honest risk assessment.',
+  weather: 'Month-by-month guidance on when to visit.',
+  planning: 'Itineraries and logistical decisions.',
+};
+---
+
+<BaseLayout
+  title={`${data.name} — Pholio`}
+  description={data.description}
+  lang="en"
+  canonicalSlug={`cities-${citySlug}`}
+  schemaType="CollectionPage"
+  keywords={[`${data.name} travel`, `${data.name} guide`, `visit ${data.name}`]}
+>
+  <section class="max-page" style="padding-top:64px;padding-bottom:48px">
+    <nav class="crumb">
+      <a href="/">VIETNAM</a>
+      <span class="sep">→</span>
+      <a href="/cities/">{data.region.toUpperCase()}</a>
+      <span class="sep">→</span>
+      <span class="cur">{data.name.toUpperCase()}</span>
+    </nav>
+    <h1 class="city-display" style="margin-top:24px">{data.name}<span class="acc">.</span></h1>
+    <p style="font-family:'Instrument Serif',serif;font-size:clamp(24px,3vw,36px);line-height:1.2;color:var(--muted);max-width:780px;font-style:italic;margin-top:24px">
+      {data.tagline}
+    </p>
+
+    <div class="facts-grid">
+      {data.bestSeason && (
+        <div class="fact-cell">
+          <div class="eyebrow" style="margin-bottom:8px">Best season</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:24px">{data.bestSeason}</div>
+          <div class="muted" style="font-size:12px;margin-top:4px">Dry, warm, low humidity</div>
+        </div>
+      )}
+      {data.daysRecommended && (
+        <div class="fact-cell">
+          <div class="eyebrow" style="margin-bottom:8px">Days to visit</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:24px">{data.daysRecommended}</div>
+          <div class="muted" style="font-size:12px;margin-top:4px">3 is the sweet spot</div>
+        </div>
+      )}
+      {data.budgetLevel && (
+        <div class="fact-cell">
+          <div class="eyebrow" style="margin-bottom:8px">Budget level</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:24px;text-transform:capitalize">{data.budgetLevel.replace('-', ' ')}</div>
+          <div class="muted" style="font-size:12px;margin-top:4px">≈ ₫1.8M per day</div>
+        </div>
+      )}
+      <div class="fact-cell">
+        <div class="eyebrow" style="margin-bottom:8px">Answered Qs</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:24px">{questions.length}</div>
+        <div class="muted" style="font-size:12px;margin-top:4px">Across {orderedCategories.length} {orderedCategories.length === 1 ? 'category' : 'categories'}</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-page" style="padding-bottom:80px">
+    <div class="ph-stripes" style="width:100%;height:280px;border:1px solid var(--border)">
+      [ map · {citySlug}.editorial_illustration ]
+    </div>
+  </div>
+
+  <section class="max-page hairline-t hairline-b" style="position:sticky;top:68px;background:var(--bg);z-index:30;padding-top:20px;padding-bottom:20px">
+    <div style="display:flex;gap:12px;overflow-x:auto;align-items:center">
+      <span class="eyebrow" style="flex-shrink:0;margin-right:8px">Filter</span>
+      <button class="tab is-active">All · {questions.length}</button>
+      {orderedCategories.map((cat) => (
+        <a href={`/categories/${cat}/`} class="tab">{categoryLabels[cat]} · {byCategory[cat].length}</a>
+      ))}
+    </div>
+  </section>
+
+  <section class="max-page sec">
+    {questions.length === 0 ? (
+      <div style="max-width:680px;padding:48px 0">
+        <p class="muted" style="font-size:18px">No questions published for {data.name} yet. <a href="/ask/" class="ulink">Ask one?</a></p>
+      </div>
+    ) : (
+      orderedCategories.map((cat) => (
+        <div style="margin-bottom:80px">
+          <div class="cat-head">
+            <div>
+              <div class="eyebrow acc" style="margin-bottom:8px">Category</div>
+              <h2 style="font-size:40px;line-height:1">{categoryLabels[cat]}<span class="muted">.</span></h2>
+              <div class="muted" style="font-size:14px;margin-top:8px">{byCategory[cat].length} {byCategory[cat].length === 1 ? 'question' : 'questions'}</div>
+            </div>
+            <div class="muted" style="max-width:560px">{categoryDescriptions[cat]}</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 64px">
+            {byCategory[cat].map((q) => (
+              <a href={`/questions/${q.data.canonicalSlug}/`} class="q-card">
+                <div class="meta">
+                  <span class="cat-tag">{categoryLabels[cat]}</span>
+                  <span class="muted" style="font-size:12px">{q.data.readingTime} min</span>
+                </div>
+                <h3 style="font-size:24px;line-height:1.2;margin-bottom:8px">{q.data.title}</h3>
+                <p class="muted" style="font-size:14px;margin:0">{q.data.description}</p>
+              </a>
+            ))}
+          </div>
+          {byCategory[cat].length >= 4 && (
+            <div class="hairline-t" style="margin-top:32px;padding-top:32px">
+              <a href={`/categories/${cat}/`} class="ulink" style="font-size:14px">See all {byCategory[cat].length} {categoryLabels[cat].toLowerCase()} questions →</a>
+            </div>
+          )}
+        </div>
+      ))
+    )}
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="max-page sec">
+    <div style="display:grid;grid-template-columns:1fr;gap:48px;align-items:end" class="app-grid-city">
+      <div style="max-width:720px">
+        <div class="eyebrow" style="margin-bottom:16px">§ · The app</div>
+        <h2 style="font-family:'Instrument Serif',serif;font-size:clamp(36px,6vw,60px);line-height:1.02">Take {data.name} <em>offline.</em></h2>
+        <p class="muted" style="font-size:18px;margin-top:24px;max-width:520px">
+          Download the {data.name} pack — every answered question, bundled with maps, addresses, opening hours, and cached offline.
+        </p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="/app/" class="store-badge"><span style="display:flex;flex-direction:column"><span class="sub">Download on</span><span class="main">App Store</span></span></a>
+        <a href="/app/" class="store-badge alt"><span style="display:flex;flex-direction:column"><span class="sub">Get it on</span><span class="main">Google Play</span></span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .facts-grid {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  @media (min-width: 768px) {
+    .facts-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .fact-cell {
+    background: var(--bg);
+    padding: 24px;
+  }
+  .cat-head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+    align-items: baseline;
+  }
+  @media (min-width: 768px) {
+    .cat-head {
+      grid-template-columns: 200px 1fr;
+    }
+  }
+  .app-grid-city {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  @media (min-width: 900px) {
+    .app-grid-city {
+      grid-template-columns: 1fr auto;
+    }
+  }
+</style>

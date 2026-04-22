@@ -1,0 +1,101 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Ask a question — Pholio"
+  description="Can't find your question about traveling Vietnam? Ask a local. An editor reads every submission; strong ones become published answers within 2-3 weeks."
+  lang="en"
+  schemaType="WebSite"
+>
+  <section class="max-page ptitle">
+    <div class="eyebrow" style="margin-top:24px">Ask a local</div>
+    <h1 class="hero-h1" style="margin-top:16px">Don't see your question?<br/><em>Ask one.</em></h1>
+    <p class="muted" style="max-width:620px;margin-top:24px;font-size:18px">If we haven't answered your question yet, send it to us. An editor reads every submission; strong ones become published answers within 2–3 weeks.</p>
+  </section>
+
+  <section class="max-page sec" style="padding-top:32px">
+    <div class="ask-grid">
+      <form method="post" action="/api/ask">
+        <div class="field">
+          <label for="a-q">Your question</label>
+          <textarea id="a-q" name="question" placeholder="e.g. Which coastal town is less crowded than Hoi An in May?"></textarea>
+        </div>
+        <div class="field">
+          <label for="a-city">City or region</label>
+          <select id="a-city" name="city">
+            <option>Hanoi</option>
+            <option>Ho Chi Minh</option>
+            <option>Hoi An</option>
+            <option>Da Nang</option>
+            <option>Sapa</option>
+            <option>Hue</option>
+            <option>Phu Quoc</option>
+            <option>Nha Trang</option>
+            <option>Nationwide / multiple</option>
+            <option>Somewhere else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="a-cat">Category</label>
+          <select id="a-cat" name="category">
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Culture</option>
+            <option>Budget</option>
+            <option>Stay</option>
+            <option>Activities</option>
+            <option>Safety</option>
+            <option>Weather</option>
+            <option>Planning</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="a-ctx">Context (optional)</label>
+          <textarea id="a-ctx" name="context" placeholder="Travel dates, your background, anything else that helps us give a useful answer."></textarea>
+        </div>
+        <div class="field">
+          <label for="a-email">Email (optional)</label>
+          <input id="a-email" name="email" type="email" placeholder="We'll notify you if your question becomes an article."/>
+        </div>
+        <button type="submit" class="btn btn-acc" style="margin-top:16px">Submit question →</button>
+      </form>
+
+      <aside>
+        <div class="hairline-t hairline-b" style="padding:24px 0">
+          <div class="eyebrow" style="margin-bottom:12px">What makes a good question?</div>
+          <ul style="list-style:none;padding:0;margin:0;font-size:14px;line-height:1.7">
+            <li class="hairline-b" style="padding:10px 0">Specific rather than general</li>
+            <li class="hairline-b" style="padding:10px 0">About a place, time, or decision</li>
+            <li class="hairline-b" style="padding:10px 0">Not answerable by a search engine in 5 seconds</li>
+            <li style="padding:10px 0">Something a local would have an opinion on</li>
+          </ul>
+        </div>
+        <div style="margin-top:24px">
+          <div class="eyebrow" style="margin-bottom:8px">Average response</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:48px;line-height:1">18 hrs</div>
+          <p class="muted" style="font-size:13px;margin-top:8px">From Pholio app subscribers</p>
+        </div>
+        <div style="margin-top:32px">
+          <div class="eyebrow" style="margin-bottom:8px">Publishable questions</div>
+          <div style="font-family:'Instrument Serif',serif;font-size:48px;line-height:1">~22%</div>
+          <p class="muted" style="font-size:13px;margin-top:8px">Become full editorial answers</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ask-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+  @media (min-width: 900px) {
+    .ask-grid {
+      grid-template-columns: 1fr 300px;
+      gap: 96px;
+    }
+  }
+</style>

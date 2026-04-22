@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 /**
  * Questions collection - mỗi file .md là một câu hỏi & trả lời.
@@ -7,7 +8,7 @@ import { defineCollection, z } from 'astro:content';
  * canonicalSlug phải giống nhau giữa VI và EN để link hreflang đúng.
  */
 const questions = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/questions' }),
   schema: z.object({
     // Core identity
     title: z.string().min(10).max(120),
@@ -61,13 +62,13 @@ const questions = defineCollection({
 });
 
 /**
- * Cities collection - metadata per city
+ * Cities collection - metadata per city.
+ * File slug (filename) serves as the city identifier; no need for slug field.
  */
 const cities = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/cities' }),
   schema: z.object({
     name: z.string(),
-    slug: z.string().regex(/^[a-z0-9-]+$/),
     region: z.string(), // "North · Capital", "Central · Coast"
     tagline: z.string(),
     description: z.string(),

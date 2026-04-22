@@ -17,6 +17,25 @@
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
 
+# Pagefind search index — cache per deploy (immutable chunks)
+/pagefind/pagefind-ui.js
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/javascript; charset=utf-8
+
+/pagefind/pagefind-ui.css
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: text/css; charset=utf-8
+
+/pagefind/*.pf_index
+  Cache-Control: public, max-age=31536000, immutable
+
+/pagefind/*.pf_meta
+  Cache-Control: public, max-age=31536000, immutable
+
+/pagefind/wasm.unknown
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/wasm
+
 /llms.txt
   Cache-Control: public, max-age=3600
   Content-Type: text/plain; charset=utf-8

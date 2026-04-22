@@ -1,0 +1,127 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const categories = [
+    { slug: 'food', label: 'Food', description: 'What locals actually eat, where to find real versions, and what to skip.' },
+    { slug: 'transport', label: 'Transport', description: 'How to get in, how to get around, and how not to get ripped off.' },
+    { slug: 'culture', label: 'Culture', description: 'Festivals, etiquette, traditions, and the things not to photograph.' },
+    { slug: 'weather', label: 'Weather', description: 'Month-by-month guidance on when to visit each region.' },
+    { slug: 'budget', label: 'Budget', description: 'Realistic daily costs across budget ranges and cities.' },
+    { slug: 'safety', label: 'Safety', description: 'Practical concerns, scam patterns, and honest risk assessment.' },
+    { slug: 'planning', label: 'Planning', description: 'Itineraries, trip duration, and logistical decisions.' },
+    { slug: 'activities', label: 'Activities', description: 'Things worth doing, and things oversold to tourists.' },
+    { slug: 'accommodation', label: 'Stay', description: 'Where to sleep, by neighborhood and travel style.' },
+  ];
+
+  return categories.map((cat) => ({
+    params: { slug: cat.slug },
+    props: cat,
+  }));
+}
+
+interface Props {
+  slug: string;
+  label: string;
+  description: string;
+}
+
+const { slug, label, description } = Astro.props;
+
+const categoryLabels: Record<string, string> = {
+  food: 'Food', transport: 'Transport', culture: 'Culture', weather: 'Weather',
+  budget: 'Budget', safety: 'Safety', planning: 'Planning',
+  activities: 'Activities', accommodation: 'Stay',
+};
+
+// Get all questions in this category
+const questions = await getCollection('questions', ({ data, id }) => {
+  return !data.draft && id.startsWith('en/') && data.category === slug;
+});
+
+// Group by city
+const byCity = questions.reduce<Record<string, typeof questions>>((acc, q) => {
+  const city = q.data.cityDisplay;
+  if (!acc[city]) acc[city] = [];
+  acc[city].push(q);
+  return acc;
+}, {});
+
+const cities = Object.keys(byCity).sort();
+---
+
+<BaseLayout
+  title={`${label} questions about Vietnam — Pholio`}
+  description={`${description} ${questions.length} answered questions across Vietnam.`}
+  lang="en"
+  canonicalSlug={`categories-${slug}`}
+  schemaType="CollectionPage"
+>
+  <section class="max-page ptitle">
+    <nav class="crumb">
+      <a href="/">PHOLIO</a>
+      <span class="sep">→</span>
+      <a href="/questions/">QUESTIONS</a>
+      <span class="sep">→</span>
+      <span class="cur">{label.toUpperCase()}</span>
+    </nav>
+    <div class="eyebrow acc" style="margin-top:24px">Category</div>
+    <h1 class="hero-h1" style="margin-top:16px">{label}<span class="muted">.</span></h1>
+    <p class="muted" style="max-width:620px;margin-top:24px;font-size:18px">{description}</p>
+    <div class="muted" style="margin-top:16px;font-size:14px">{questions.length} questions · across {cities.length} {cities.length === 1 ? 'city' : 'cities'}</div>
+  </section>
+
+  <section class="max-page sec">
+    {questions.length === 0 ? (
+      <div style="max-width:680px">
+        <p class="muted" style="font-size:18px">No {label.toLowerCase()} questions published yet. Check back soon, or <a href="/ask/" class="ulink">ask one</a>.</p>
+      </div>
+    ) : (
+      <div style="max-width:1000px">
+        {cities.map((city) => (
+          <div class="hairline-b city-row">
+            <div class="city-header">
+              <div class="eyebrow">{city}</div>
+              <div class="muted" style="font-size:13px;margin-top:4px">{byCity[city].length} questions</div>
+            </div>
+            <div>
+              {byCity[city].map((q, i) => (
+                <a
+                  href={`/questions/${q.data.canonicalSlug}/`}
+                  class="q-card"
+                  style={i === 0 ? 'padding-top:0;border-top:none' : ''}
+                >
+                  <div class="meta">
+                    <span class="cat-tag">{categoryLabels[q.data.category]}</span>
+                    <span class="muted" style="font-size:12px">{q.data.readingTime} min</span>
+                  </div>
+                  <h3 style="font-size:22px;line-height:1.2;margin-bottom:8px">{q.data.title}</h3>
+                  <p class="muted" style="font-size:14px;margin:0">{q.data.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .city-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 32px 0;
+  }
+  @media (min-width: 900px) {
+    .city-row {
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+    }
+  }
+  .city-header {
+    padding-top: 8px;
+  }
+</style>

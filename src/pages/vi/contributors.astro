@@ -1,0 +1,72 @@
+---
+// TODO-VI: review bios if needed
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const contributors = [
+  { name: 'Linh Phạm', role: 'Tổng biên tập', city: 'Hà Nội', bio: 'Nhà báo ẩm thực, 12 năm về các vùng ẩm thực.', avatar: 1, count: 18 },
+  { name: 'Minh Trần', role: 'Biên tập miền Trung', city: 'Hội An', bio: 'Sinh ra ở Hội An. Dẫn tour chợ.', avatar: 2, count: 22 },
+  { name: 'An Nguyễn', role: 'Biên tập miền Nam', city: 'TP. HCM', bio: 'Cựu nhà phê bình kiến trúc.', avatar: 3, count: 31 },
+  { name: 'Hoa Lê', role: 'App lead', city: 'Hà Nội', bio: 'Ex-Grab product. Xây dựng các offline pack.', avatar: 4, count: 4 },
+  { name: 'Thảo Đỗ', role: 'Cộng tác viên', city: 'Sa Pa', bio: 'Hướng dẫn trekking. Viết về du lịch vùng cao.', avatar: 1, count: 11 },
+  { name: 'Khoa Vũ', role: 'Cộng tác viên', city: 'Huế', bio: 'Nhiếp ảnh di sản.', avatar: 2, count: 7 },
+  { name: 'Bình Hoàng', role: 'Cộng tác viên', city: 'Phú Quốc', bio: 'Đầu bếp. Viết về hải sản và ẩm thực đảo.', avatar: 3, count: 9 },
+  { name: 'Thu Nguyễn', role: 'Cộng tác viên', city: 'Hà Nội', bio: 'Người Hà Nội lâu năm, viết về cà phê.', avatar: 4, count: 14 },
+  { name: 'Duy Lê', role: 'Cộng tác viên', city: 'Đà Nẵng', bio: 'Lướt sóng. Viết về biển miền Trung.', avatar: 1, count: 6 },
+  { name: 'My Phan', role: 'Cộng tác viên', city: 'TP. HCM', bio: 'Nhà báo design, tập trung nightlife Sài Gòn.', avatar: 2, count: 10 },
+  { name: 'Long Đặng', role: 'Cộng tác viên', city: 'Nha Trang', bio: 'Thợ lặn và nhà sinh vật biển.', avatar: 3, count: 5 },
+  { name: 'Giang Bùi', role: 'Cộng tác viên', city: 'Hà Nội', bio: 'Sử gia. Viết về phố cổ.', avatar: 4, count: 13 },
+];
+---
+
+<BaseLayout
+  title="Cộng tác viên — Pholio"
+  description="47 nhà văn tại 8 thành phố Việt Nam. Mọi câu trả lời trên Pholio đều được ghi tên tác giả."
+  lang="vi"
+  schemaType="WebSite"
+>
+  <section class="max-page ptitle">
+    <nav class="crumb"><a href="/vi/">PHOLIO</a><span class="sep">→</span><a href="/vi/about/">GIỚI THIỆU</a><span class="sep">→</span><span class="cur">CỘNG TÁC VIÊN</span></nav>
+    <div class="eyebrow" style="margin-top:24px">47 nhà văn · 8 thành phố</div>
+    <h1 class="hero-h1" style="margin-top:16px">Những người <em>đang viết.</em></h1>
+    <p class="muted" style="max-width:620px;margin-top:24px;font-size:18px">Mọi câu trả lời trên Pholio đều được ghi tên. Các cộng tác viên của chúng tôi là người địa phương, người cư trú lâu năm, và các nhà văn chuyên nghiệp — không phải intern brief từ Google.</p>
+  </section>
+
+  <section class="max-page hairline-t hairline-b" style="padding:20px 24px">
+    <div style="display:flex;gap:12px;overflow-x:auto;align-items:center">
+      <span class="eyebrow" style="flex-shrink:0">Lọc</span>
+      <button class="tab is-active">Tất cả 47</button>
+      <button class="tab">Biên tập · 6</button>
+      <button class="tab">Hà Nội · 12</button>
+      <button class="tab">TP. HCM · 14</button>
+      <button class="tab">Hội An · 8</button>
+      <button class="tab">Khác · 7</button>
+    </div>
+  </section>
+
+  <section class="max-page sec">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px">
+      {contributors.map((c) => (
+        <article class="profile-card">
+          <div class={`avatar ph-solid-${c.avatar}`}></div>
+          <div style="flex:1">
+            <div style="font-family:'Instrument Serif',serif;font-size:22px;line-height:1.2">{c.name}</div>
+            <div class="muted" style="font-size:13px;margin-top:4px">{c.role} · {c.city}</div>
+            <p style="font-size:14px;margin:12px 0 0;color:var(--muted)">{c.bio}</p>
+            <div class="mono" style="font-size:11px;color:var(--muted);margin-top:16px;padding-top:12px;border-top:1px solid var(--border)">
+              {c.count} BÀI
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="max-page sec hairline-t">
+    <div style="max-width:720px">
+      <div class="eyebrow" style="margin-bottom:16px">§ · Đóng góp</div>
+      <h2 class="display-h2" style="margin-bottom:24px">Bạn hiểu Việt Nam?<br/><em>Gửi bài.</em></h2>
+      <p class="muted" style="font-size:18px;margin-bottom:32px">Chúng tôi trả nhuận bút cho mỗi bài được đăng và đặc biệt tìm tiếng nói ở Ninh Bình, Hà Giang, và Côn Đảo.</p>
+      <a href="/vi/contact/" class="btn">Gửi bài →</a>
+    </div>
+  </section>
+</BaseLayout>

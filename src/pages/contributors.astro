@@ -1,0 +1,71 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const contributors = [
+  { name: 'Linh Phạm', role: 'Editor-in-chief', city: 'Hanoi', bio: 'Food writer, 12 years on regional cuisines.', avatar: 1, count: 18 },
+  { name: 'Minh Trần', role: 'Central coast editor', city: 'Hoi An', bio: 'Born in Hoi An. Runs market walks.', avatar: 2, count: 22 },
+  { name: 'An Nguyễn', role: 'Southern editor', city: 'Ho Chi Minh', bio: 'Former architecture critic.', avatar: 3, count: 31 },
+  { name: 'Hoa Lê', role: 'App lead', city: 'Hanoi', bio: 'Ex-Grab product. Builds the offline packs.', avatar: 4, count: 4 },
+  { name: 'Thảo Đỗ', role: 'Contributor', city: 'Sapa', bio: 'Trekking guide. Writes on highland travel.', avatar: 1, count: 11 },
+  { name: 'Khoa Vũ', role: 'Contributor', city: 'Hue', bio: 'Heritage photographer.', avatar: 2, count: 7 },
+  { name: 'Bình Hoàng', role: 'Contributor', city: 'Phu Quoc', bio: 'Chef. Writes on seafood and island cooking.', avatar: 3, count: 9 },
+  { name: 'Thu Nguyễn', role: 'Contributor', city: 'Hanoi', bio: 'Long-time Hanoi resident, writes on coffee.', avatar: 4, count: 14 },
+  { name: 'Duy Lê', role: 'Contributor', city: 'Da Nang', bio: 'Surfer. Writes on the central coast beaches.', avatar: 1, count: 6 },
+  { name: 'My Phan', role: 'Contributor', city: 'Ho Chi Minh', bio: 'Design writer, focused on Saigon nightlife.', avatar: 2, count: 10 },
+  { name: 'Long Đặng', role: 'Contributor', city: 'Nha Trang', bio: 'Diver and marine biologist.', avatar: 3, count: 5 },
+  { name: 'Giang Bùi', role: 'Contributor', city: 'Hanoi', bio: 'Historian. Writes on the old quarter.', avatar: 4, count: 13 },
+];
+---
+
+<BaseLayout
+  title="Contributors — Pholio"
+  description="47 writers across 8 cities in Vietnam. Every answer on Pholio is credited. Our contributors are locals, long-term residents, and working writers."
+  lang="en"
+  schemaType="WebSite"
+>
+  <section class="max-page ptitle">
+    <nav class="crumb"><a href="/">PHOLIO</a><span class="sep">→</span><a href="/about/">ABOUT</a><span class="sep">→</span><span class="cur">CONTRIBUTORS</span></nav>
+    <div class="eyebrow" style="margin-top:24px">47 writers · 8 cities</div>
+    <h1 class="hero-h1" style="margin-top:16px">The people <em>writing it.</em></h1>
+    <p class="muted" style="max-width:620px;margin-top:24px;font-size:18px">Every answer on Pholio is credited. Our contributors are locals, long-term residents, and working writers — never interns briefed from Google.</p>
+  </section>
+
+  <section class="max-page hairline-t hairline-b" style="padding:20px 24px">
+    <div style="display:flex;gap:12px;overflow-x:auto;align-items:center">
+      <span class="eyebrow" style="flex-shrink:0">Filter</span>
+      <button class="tab is-active">All 47</button>
+      <button class="tab">Editors · 6</button>
+      <button class="tab">Hanoi · 12</button>
+      <button class="tab">Ho Chi Minh · 14</button>
+      <button class="tab">Hoi An · 8</button>
+      <button class="tab">Other · 7</button>
+    </div>
+  </section>
+
+  <section class="max-page sec">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px">
+      {contributors.map((c) => (
+        <article class="profile-card">
+          <div class={`avatar ph-solid-${c.avatar}`}></div>
+          <div style="flex:1">
+            <div style="font-family:'Instrument Serif',serif;font-size:22px;line-height:1.2">{c.name}</div>
+            <div class="muted" style="font-size:13px;margin-top:4px">{c.role} · {c.city}</div>
+            <p style="font-size:14px;margin:12px 0 0;color:var(--muted)">{c.bio}</p>
+            <div class="mono" style="font-size:11px;color:var(--muted);margin-top:16px;padding-top:12px;border-top:1px solid var(--border)">
+              {c.count} ANSWERS
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="max-page sec hairline-t">
+    <div style="max-width:720px">
+      <div class="eyebrow" style="margin-bottom:16px">§ · Contribute</div>
+      <h2 class="display-h2" style="margin-bottom:24px">Know Vietnam well?<br/><em>Pitch us.</em></h2>
+      <p class="muted" style="font-size:18px;margin-bottom:32px">We pay per published answer and are particularly looking for voices in Ninh Bình, Ha Giang, and Con Dao.</p>
+      <a href="/contact/" class="btn">Pitch an answer →</a>
+    </div>
+  </section>
+</BaseLayout>

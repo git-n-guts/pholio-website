@@ -1,0 +1,81 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact — Pholio"
+  description="Get in touch with Pholio. Editorial, app support, press inquiries, or office address."
+  lang="en"
+  schemaType="WebSite"
+>
+  <section class="max-page ptitle">
+    <div class="eyebrow" style="margin-top:24px">Get in touch</div>
+    <h1 class="hero-h1" style="margin-top:16px">Write to us.</h1>
+  </section>
+
+  <section class="max-page sec">
+    <div class="contact-grid">
+      <aside>
+        <div style="margin-bottom:32px">
+          <div class="eyebrow" style="margin-bottom:8px">Editorial</div>
+          <a href="mailto:editors@pholio.co" class="ulink">editors@pholio.co</a>
+          <p class="muted" style="font-size:13px;margin-top:8px">Corrections, fact-checks, pitches.</p>
+        </div>
+        <div style="margin-bottom:32px">
+          <div class="eyebrow" style="margin-bottom:8px">App support</div>
+          <a href="mailto:app@pholio.co" class="ulink">app@pholio.co</a>
+          <p class="muted" style="font-size:13px;margin-top:8px">Bug reports, subscription questions.</p>
+        </div>
+        <div style="margin-bottom:32px">
+          <div class="eyebrow" style="margin-bottom:8px">Press</div>
+          <a href="mailto:press@pholio.co" class="ulink">press@pholio.co</a>
+        </div>
+        <div class="hairline-t" style="padding-top:24px">
+          <div class="eyebrow" style="margin-bottom:8px">Office</div>
+          <p style="font-size:14px;margin:0;line-height:1.5">14 Nguyễn Quang Bích<br/>Hoàn Kiếm, Hanoi<br/>Vietnam</p>
+        </div>
+      </aside>
+
+      <form method="post" action="/api/contact">
+        <div class="field">
+          <label for="c-topic">What's this about</label>
+          <select id="c-topic" name="topic">
+            <option>General</option>
+            <option>Pitch a question</option>
+            <option>Correction</option>
+            <option>Press inquiry</option>
+            <option>App support</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="c-name">Your name</label>
+          <input id="c-name" name="name" type="text"/>
+        </div>
+        <div class="field">
+          <label for="c-email">Your email</label>
+          <input id="c-email" name="email" type="email"/>
+        </div>
+        <div class="field">
+          <label for="c-message">Message</label>
+          <textarea id="c-message" name="message"></textarea>
+        </div>
+        <button type="submit" class="btn" style="margin-top:16px">Send message →</button>
+        <p class="muted" style="font-size:13px;margin-top:16px">Typical reply within 2 business days.</p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+  @media (min-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 300px 1fr;
+      gap: 96px;
+    }
+  }
+</style>
