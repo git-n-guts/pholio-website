@@ -185,8 +185,8 @@ details>.answer{padding-top:14px;font-size:16px;line-height:1.7}
 .city-name{font-family:var(--font-heading);font-size:40px;line-height:1;margin-bottom:8px}
 
 /* Section titling */
-.sec{padding:96px 0}
-@media(max-width:767px){.sec{padding:64px 0}}
+.sec{padding-top:96px;padding-bottom:96px}
+@media(max-width:767px){.sec{padding-top:64px;padding-bottom:64px}}
 .sec-head{margin-bottom:64px}
 
 /* Tag list */
@@ -221,5 +221,5 @@ details>.answer{padding-top:14px;font-size:16px;line-height:1.7}
 .crumb .cur{color:var(--ink)}
 
 /* Page title block */
-.ptitle{padding:80px 0 48px}
+.ptitle{padding-top:80px;padding-bottom:48px}
 .ptitle .eyebrow{margin-bottom:16px}
