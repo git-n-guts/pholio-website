@@ -67,7 +67,7 @@ const categoryDescriptions: Record<string, string> = {
       <span class="cur">{data.name.toUpperCase()}</span>
     </nav>
     <h1 class="city-display" style="margin-top:24px">{data.name}<span class="acc">.</span></h1>
-    <p style="font-family:'Instrument Serif',serif;font-size:clamp(24px,3vw,36px);line-height:1.2;color:var(--muted);max-width:780px;font-style:italic;margin-top:24px">
+    <p style="font-family:'Bona Nova SC',serif;font-size:clamp(24px,3vw,36px);line-height:1.2;color:var(--muted);max-width:780px;font-style:italic;margin-top:24px">
       {data.tagline}
     </p>
 
@@ -75,27 +75,27 @@ const categoryDescriptions: Record<string, string> = {
       {data.bestSeason && (
         <div class="fact-cell">
           <div class="eyebrow" style="margin-bottom:8px">Mùa đẹp nhất</div>
-          <div style="font-family:'Instrument Serif',serif;font-size:24px">{data.bestSeason}</div>
+          <div style="font-family:'Bona Nova SC',serif;font-size:24px">{data.bestSeason}</div>
           <div class="muted" style="font-size:12px;margin-top:4px">Khô, ấm, độ ẩm thấp</div>
         </div>
       )}
       {data.daysRecommended && (
         <div class="fact-cell">
           <div class="eyebrow" style="margin-bottom:8px">Số ngày nên đi</div>
-          <div style="font-family:'Instrument Serif',serif;font-size:24px">{data.daysRecommended}</div>
+          <div style="font-family:'Bona Nova SC',serif;font-size:24px">{data.daysRecommended}</div>
           <div class="muted" style="font-size:12px;margin-top:4px">3 ngày là vừa đủ</div>
         </div>
       )}
       {data.budgetLevel && (
         <div class="fact-cell">
           <div class="eyebrow" style="margin-bottom:8px">Mức chi tiêu</div>
-          <div style="font-family:'Instrument Serif',serif;font-size:24px;text-transform:capitalize">{data.budgetLevel.replace('-', ' ')}</div>
+          <div style="font-family:'Bona Nova SC',serif;font-size:24px;text-transform:capitalize">{data.budgetLevel.replace('-', ' ')}</div>
           <div class="muted" style="font-size:12px;margin-top:4px">≈ ₫1,8 triệu/ngày</div>
         </div>
       )}
       <div class="fact-cell">
         <div class="eyebrow" style="margin-bottom:8px">Câu đã trả lời</div>
-        <div style="font-family:'Instrument Serif',serif;font-size:24px">{questions.length}</div>
+        <div style="font-family:'Bona Nova SC',serif;font-size:24px">{questions.length}</div>
         <div class="muted" style="font-size:12px;margin-top:4px">{orderedCategories.length} chuyên mục</div>
       </div>
     </div>
@@ -161,7 +161,7 @@ const categoryDescriptions: Record<string, string> = {
     <div style="display:grid;grid-template-columns:1fr;gap:48px;align-items:end" class="app-grid-city">
       <div style="max-width:720px">
         <div class="eyebrow" style="margin-bottom:16px">§ · Ứng dụng</div>
-        <h2 style="font-family:'Instrument Serif',serif;font-size:clamp(36px,6vw,60px);line-height:1.02">Đem {data.name} <em>offline.</em></h2>
+        <h2 style="font-family:'Bona Nova SC',serif;font-size:clamp(36px,6vw,60px);line-height:1.02">Đem {data.name} <em>offline.</em></h2>
         <p class="muted" style="font-size:18px;margin-top:24px;max-width:520px">
           Tải pack {data.name} — mọi câu hỏi đã trả lời, kèm bản đồ, địa chỉ, giờ mở cửa, cache offline.
         </p>
