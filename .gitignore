@@ -28,3 +28,7 @@ Thumbs.db
 
 # Cloudflare
 .wrangler/
+
+# Bmad
+_bmad/
+_bmad-output/
