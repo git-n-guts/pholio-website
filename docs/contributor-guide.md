@@ -1,4 +1,4 @@
-# Contributor Guide — Keystatic CMS
+# Contributor Guide — Pholio Content Editing
 
 How to create and edit content on Pholio through the CMS admin UI.
 
@@ -6,9 +6,22 @@ How to create and edit content on Pholio through the CMS admin UI.
 
 ## Access
 
-1. Go to `https://pholio.co/keystatic/`
+1. Go to `https://admin.pholio.click/keystatic/`
 2. Log in with your GitHub account (must be added to the Keystatic Cloud team)
 3. You'll see 3 collections: **Questions (English)**, **Questions (Vietnamese)**, **Cities**
+
+> **Note:** The CMS admin is a separate site (`admin.pholio.click`) — it is not part of the main Pholio website. No local development environment is needed for content editing.
+
+## Content Workflow
+
+```
+Edit at admin.pholio.click
+  → Save
+  → Keystatic Cloud commits to pholio-website repo on GitHub
+  → Cloudflare Pages auto-deploys pholio.click
+```
+
+Changes typically appear on pholio.click within 1–2 minutes after saving.
 
 ## Creating a New Question
 
@@ -29,7 +42,7 @@ Every question must exist in **both languages** with the same `canonicalSlug`.
    - **Reading Time**: integer, minutes
    - **FAQ**: add at least 3 items (question + answer pairs)
    - **Content**: article body with formatting, links, images
-3. Click **Save** — this commits directly to the `main` branch
+3. Click **Save** — this commits directly to the `main` branch via Keystatic Cloud
 
 ### Vietnamese
 
@@ -44,7 +57,7 @@ Every question must exist in **both languages** with the same `canonicalSlug`.
 
 1. Open the collection → click the entry
 2. Edit fields as needed
-3. Click **Save** — commits to `main`, triggers Cloudflare Pages rebuild
+3. Click **Save** — Keystatic Cloud commits to `main`, triggers Cloudflare Pages rebuild
 
 ## Editing a City
 
@@ -83,6 +96,7 @@ See [how-to-create-new-article.md](./how-to-create-new-article.md) for detailed 
 ## Important Notes
 
 - **Always create both EN + VI versions** — never publish one without the other
-- **Saves commit directly to `main`** — Cloudflare auto-deploys within 1–2 minutes
+- **Saves commit directly to `main`** via Keystatic Cloud — Cloudflare auto-deploys within 1–2 minutes
 - **Don't modify `canonicalSlug`** after creation — it's used for URL routing and hreflang
 - **Quick Answer is the most important field** — Perplexity and ChatGPT preferentially cite this block
+- **The CMS admin is at `admin.pholio.click`**, not on the main site

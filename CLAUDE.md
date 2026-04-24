@@ -10,10 +10,28 @@ The strategic goal is **being cited by LLMs** (Perplexity, ChatGPT, Google AI Ov
 
 - **Astro 5** with Content Collections
 - **TypeScript strict** mode
-- **Static output** — no SSR needed, entire site prerenders
+- **Static output** — no SSR, no React, entire site prerenders as pure HTML
 - **Cloudflare Pages** for hosting (auto-deploy from main branch)
-- No framework components (React/Vue) — pure Astro for maximum performance
+- **Keystatic CMS** for content editing — lives in separate repo (`pholio-cms`), deployed at admin.pholio.click
+- No framework components (React/Vue) on content pages — pure Astro for maximum performance
 - No Tailwind — hand-written CSS in `src/styles/global.css`
+
+## Two-repo architecture
+
+```
+pholio-cms repo (admin.pholio.click)     pholio-website repo (pholio.click)
+├── keystatic.config.ts                   ├── src/content/ (markdown files)
+├── astro.config.mjs (SSR)                ├── astro.config.mjs (static)
+└── React + Keystatic deps                └── Zero CMS/React deps
+         │                                        ▲
+         │ Keystatic Cloud commits                │
+         └────────────────────────────────────────┘
+```
+
+- Content editing happens at `admin.pholio.click` (separate repo)
+- Keystatic Cloud commits content changes directly to this repo
+- This repo has **zero** Keystatic or React dependencies
+- Schema changes must be made in **both repos** — see `docs/schema-sync.md`
 
 ## i18n structure
 
@@ -85,13 +103,17 @@ src/
 ├── components/       Reusable Astro components (.astro only)
 ├── content/
 │   ├── config.ts     Zod schemas (don't edit without testing build)
-│   └── questions/
-│       ├── en/       English Q&A markdown files
-│       └── vi/       Vietnamese Q&A markdown files
+│   ├── questions/
+│   │   ├── en/       English Q&A markdown files
+│   │   └── vi/       Vietnamese Q&A markdown files
+│   └── cities/       City markdown files
 ├── layouts/          BaseLayout wraps every page
 ├── pages/            File-based routing (EN at root, VI under /vi/)
 ├── styles/
 │   └── global.css    All site CSS — DO NOT add new CSS files
+
+⚠️  keystatic.config.ts lives in the pholio-cms repo, NOT here.
+    See docs/schema-sync.md for the sync convention.
 ```
 
 ## Workflow: creating a new question
@@ -120,6 +142,10 @@ When the user asks to create a new question:
 - Create pages that don't exist in both languages
 - Use stock travel photography clichés (tourists on beaches, etc.) — placeholder blocks or commissioned photos only
 - Add AI-generated images to published content without review
+- Add Keystatic or React dependencies to this repo — CMS admin is in pholio-cms repo
+- Add `keystatic.config.ts` to this repo — it belongs in pholio-cms
+- Modify content field structure without updating keystatic.config.ts in pholio-cms repo (see docs/schema-sync.md)
+- Add SSR adapter to Astro config — this site must remain purely static
 
 ## Build & deploy
 
@@ -129,6 +155,8 @@ npm run dev          # local dev on http://localhost:4321
 npm run build        # astro build + pagefind index → dist/
 npm run preview      # preview production build locally
 ```
+
+**Content editing**: Visit `admin.pholio.click` (separate repo: pholio-cms). Keystatic Cloud commits edits directly to this repo, triggering Cloudflare Pages auto-deploy. Do not add Keystatic dependencies to this repo.
 
 ## Search (Pagefind)
 
