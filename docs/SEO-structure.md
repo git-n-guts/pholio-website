@@ -13,6 +13,7 @@
 | Questions index | `/questions/` | `/vi/questions/` |
 | Cities index | `/cities/` | `/vi/cities/` |
 | Static pages | `/{page}/` | `/vi/{page}/` |
+hello
 
 Static pages: about, app, ask, contact, contributors, editorial, privacy, search, terms.
 
