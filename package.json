@@ -6,15 +6,19 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build && npx pagefind --site dist --output-path dist/pagefind",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "npm run build && wrangler dev",
+    "astro": "astro",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "12",
     "@astrojs/mdx": "^4.0.0",
     "@astrojs/sitemap": "^3.2.0",
     "astro": "^5.0.0"
   },
   "devDependencies": {
-    "pagefind": "^1.5.2"
+    "pagefind": "^1.5.2",
+    "wrangler": "^4.84.1"
   }
 }
