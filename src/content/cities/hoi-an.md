@@ -1,6 +1,5 @@
 ---
 name: "Hoi An"
-slug: "hoi-an"
 region: "Central · Coast"
 tagline: "The UNESCO-protected lantern town on Vietnam's central coast."
 description: "Hoi An's old town is a UNESCO World Heritage site preserved in late-16th-century trading-port form. Its food, tailors, and lantern-lit riverfront make it a cornerstone of any central Vietnam itinerary."

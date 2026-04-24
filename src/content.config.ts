@@ -64,6 +64,10 @@ const questions = defineCollection({
 /**
  * Cities collection - metadata per city.
  * File slug (filename) serves as the city identifier; no need for slug field.
+ *
+ * Body content is parsed automatically by Astro's glob loader.
+ * Keystatic defines `content: fields.document()` for the CMS editing UI,
+ * but Zod schema doesn't need it — the body is accessible via render().
  */
 const cities = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/cities' }),
