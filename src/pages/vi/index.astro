@@ -1,7 +1,36 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import QuestionCard from '@components/QuestionCard.astro';
 import CityCard from '@components/CityCard.astro';
+
+const categoryLabels: Record<string, string> = {
+  food: 'Ẩm thực',
+  transport: 'Di chuyển',
+  culture: 'Văn hoá',
+  weather: 'Thời tiết',
+  budget: 'Chi phí',
+  safety: 'An toàn',
+  planning: 'Lên kế hoạch',
+  activities: 'Hoạt động',
+  accommodation: 'Chỗ ở',
+};
+
+const recentAnswers = (
+  await getCollection('questions', ({ data, id }) =>
+    !data.draft && id.startsWith('vi/')
+  )
+)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 5)
+  .map((q) => ({
+    href: `/vi/questions/${q.data.city}/${q.data.canonicalSlug}/`,
+    category: categoryLabels[q.data.category] ?? q.data.category,
+    city: q.data.cityDisplay,
+    readingTime: q.data.readingTime,
+    title: q.data.title,
+    date: q.data.pubDate.toLocaleDateString('vi-VN', { month: 'short', day: 'numeric' }),
+  }));
 
 const popularQuestions = [
   {
@@ -65,13 +94,6 @@ const cities = [
   { name: 'Nha Trang', region: 'Ven biển · Nghỉ dưỡng', questionCount: 18, href: '/vi/cities/nha-trang/' },
 ];
 
-const recentAnswers = [
-  { date: '21 Th4', category: 'Di chuyển', city: 'Hà Nội', title: 'Đi Hà Nội lần đầu nên ở quận nào?', readingTime: 4, href: '/vi/questions/hanoi/quan-o-lan-dau/' },
-  { date: '19 Th4', category: 'Ẩm thực', city: 'TP.HCM', title: 'Người Sài Gòn ăn bánh xèo ở đâu (không phải chỗ khách du lịch)?', readingTime: 5, href: '/vi/questions/ho-chi-minh/banh-xeo-dia-phuong/' },
-  { date: '17 Th4', category: 'Lên kế hoạch', city: 'Toàn quốc', title: 'Hai tuần có đủ đi Việt Nam từ Bắc vào Nam không?', readingTime: 8, href: '/vi/questions/vietnam/lich-trinh-hai-tuan/' },
-  { date: '14 Th4', category: 'Văn hoá', city: 'Huế', title: 'Trước khi đi Đại Nội cần biết những gì?', readingTime: 6, href: '/vi/questions/hue/dai-noi/' },
-  { date: '12 Th4', category: 'Chi phí', city: 'Phú Quốc', title: 'Phú Quốc có đắt hơn đất liền không?', readingTime: 4, href: '/vi/questions/phu-quoc/chi-phi-so-voi-dat-lien/' },
-];
 ---
 
 <BaseLayout

@@ -1,7 +1,36 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import QuestionCard from '@components/QuestionCard.astro';
 import CityCard from '@components/CityCard.astro';
+
+const categoryLabels: Record<string, string> = {
+  food: 'Food',
+  transport: 'Transport',
+  culture: 'Culture',
+  weather: 'Weather',
+  budget: 'Budget',
+  safety: 'Safety',
+  planning: 'Planning',
+  activities: 'Activities',
+  accommodation: 'Stay',
+};
+
+const recentAnswers = (
+  await getCollection('questions', ({ data, id }) =>
+    !data.draft && id.startsWith('en/')
+  )
+)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 5)
+  .map((q) => ({
+    href: `/questions/${q.data.city}/${q.data.canonicalSlug}/`,
+    category: categoryLabels[q.data.category] ?? q.data.category,
+    city: q.data.cityDisplay,
+    readingTime: q.data.readingTime,
+    title: q.data.title,
+    date: q.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+  }));
 
 // TODO: sau này data này sẽ đến từ Content Collections
 // Hiện tại hardcode để match với home.html mẫu
@@ -67,13 +96,6 @@ const cities = [
   { name: 'Nha Trang', region: 'Coast · Resort', questionCount: 18, href: '/cities/nha-trang/' },
 ];
 
-const recentAnswers = [
-  { date: 'Apr 21', category: 'Transport', city: 'Hanoi', title: 'Which district should I stay in for a first trip to Hanoi?', readingTime: 4, href: '/questions/hanoi/best-district-first-trip/' },
-  { date: 'Apr 19', category: 'Food', city: 'Ho Chi Minh', title: 'Where do locals eat bánh xèo in Saigon (not the tourist version)?', readingTime: 5, href: '/questions/ho-chi-minh/local-banh-xeo/' },
-  { date: 'Apr 17', category: 'Planning', city: 'Nationwide', title: 'Is two weeks enough time to see Vietnam end to end?', readingTime: 8, href: '/questions/vietnam/two-weeks-itinerary/' },
-  { date: 'Apr 14', category: 'Culture', city: 'Hue', title: 'What should I know before visiting the Imperial City?', readingTime: 6, href: '/questions/hue/imperial-city/' },
-  { date: 'Apr 12', category: 'Budget', city: 'Phu Quoc', title: 'Is Phu Quoc more expensive than the mainland?', readingTime: 4, href: '/questions/phu-quoc/cost-vs-mainland/' },
-];
 ---
 
 <BaseLayout

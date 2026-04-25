@@ -171,6 +171,54 @@ Search is powered by Pagefind — a static search library that indexes at build 
 
 Cloudflare Pages auto-deploys from `main` branch. Build output: `dist/`. Node version: 20.
 
+## Notion Kanban — Implementation Tracker
+
+Board: **https://www.notion.so/dfaef06758f745b98a60505e89f0ef33**
+Data source ID: `2ddb23eb-ce40-42d3-9702-09cca25448c7`
+
+Kanban được group by **Status**. Khi tạo story mới hoặc cập nhật status, dùng Notion MCP.
+
+### Status values
+
+| Value | Ý nghĩa |
+|-------|---------|
+| `backlog` | Chưa lên kế hoạch |
+| `pending` | Planned nhưng chưa có story file |
+| `ready-for-dev` | Story file đã tạo, sẵn sàng implement |
+| `in-progress` | Đang làm |
+| `dev-complete` | Code xong, chưa review |
+| `complete` | Done hoàn toàn |
+| `review` | Đang chờ review |
+
+### Type values
+
+`epic` · `story` · `spec` · `backlog`
+
+### Epic values
+
+`Epic 1 · Keystatic Infra` · `Epic 2 · Two-Repo Architecture` · `Epic 3 · Homepage Real Data` · `Epic 4 · Hà Nội Content Sprint` · `Standalone`
+
+### Thêm card mới lên Kanban
+
+```
+Dùng mcp__claude_ai_Notion__notion-create-pages với:
+- parent: { type: "data_source_id", data_source_id: "2ddb23eb-ce40-42d3-9702-09cca25448c7" }
+- properties: { Name, Status, Type, Epic, Description, Sprint Days }
+```
+
+### Cập nhật status một card
+
+```
+Dùng mcp__claude_ai_Notion__notion-update-page với page ID + property Status mới.
+Lấy page ID từ kết quả create-pages hoặc notion-search "tên card".
+```
+
+### Workflow chuẩn khi tạo story mới
+
+1. Tạo story file trong `_bmad-output/implementation-artifacts/`
+2. Dùng Notion MCP tạo card tương ứng với đúng Status + Epic + Description
+3. Khi story done → update Status thành `dev-complete` hoặc `complete`
+
 ## AEO validation checklist
 
 Before considering a question page "done":
