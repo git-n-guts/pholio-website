@@ -151,11 +151,27 @@ const recentAnswers = [
 
   <div class="rule"></div>
 
+  {/* Recent answers */}
+  <section class="max-page sec">
+    <div class="sec-head" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px">§ 03 · Mới trả lời</div>
+        <h2 class="display-h2">Vừa ráo mực.</h2>
+      </div>
+      <a href="/vi/questions/" class="ulink" style="font-size:14px">Tất cả bài mới →</a>
+    </div>
+    <div style="max-width:900px">
+      {recentAnswers.map((q) => <QuestionCard {...q} variant="compact" />)}
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
   {/* App */}
   <section class="max-page sec">
     <div style="display:grid;grid-template-columns:1fr;gap:64px;align-items:center" class="app-grid">
       <div>
-        <div class="eyebrow" style="margin-bottom:16px">§ 03 · Ứng dụng</div>
+        <div class="eyebrow" style="margin-bottom:16px">§ 04 · Ứng dụng</div>
         <h2 class="display-h2" style="margin-bottom:32px">Lưu câu trả lời.<br/>Dùng <em>offline.</em></h2>
         <p class="muted" style="font-size:18px;margin-bottom:24px;max-width:480px">
           Ứng dụng Pholio biến mỗi câu trả lời bạn đã đọc thành một guide offline — bản đồ, địa chỉ, giờ mở cửa, và ghi chú địa phương, đóng gói theo thành phố.
@@ -210,22 +226,6 @@ const recentAnswers = [
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  {/* Recent answers */}
-  <section class="max-page sec">
-    <div class="sec-head" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px">
-      <div>
-        <div class="eyebrow" style="margin-bottom:16px">§ 04 · Mới trả lời</div>
-        <h2 class="display-h2">Vừa ráo mực.</h2>
-      </div>
-      <a href="/vi/questions/" class="ulink" style="font-size:14px">Tất cả bài mới →</a>
-    </div>
-    <div style="max-width:900px">
-      {recentAnswers.map((q) => <QuestionCard {...q} variant="compact" />)}
     </div>
   </section>
 </BaseLayout>

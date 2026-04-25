@@ -153,11 +153,33 @@ const recentAnswers = [
 
   <div class="rule"></div>
 
+  {/* Recent answers */}
+  <section class="max-page sec">
+    <div class="sec-head" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px">§ 03 · Recently answered</div>
+        <h2 class="display-h2">Fresh off the desk.</h2>
+      </div>
+      <a href="/questions/" class="ulink" style="font-size:14px">All recent →</a>
+    </div>
+    <div style="max-width:900px">
+      {recentAnswers.map((q, i) => (
+        <QuestionCard
+          {...q}
+          variant="compact"
+          class:list={i === recentAnswers.length - 1 ? ['hairline-b'] : []}
+        />
+      ))}
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
   {/* App */}
   <section class="max-page sec">
     <div style="display:grid;grid-template-columns:1fr;gap:64px;align-items:center" class="app-grid">
       <div>
-        <div class="eyebrow" style="margin-bottom:16px">§ 03 · The app</div>
+        <div class="eyebrow" style="margin-bottom:16px">§ 04 · The app</div>
         <h2 class="display-h2" style="margin-bottom:32px">Save answers.<br/>Take them <em>offline.</em></h2>
         <p class="muted" style="font-size:18px;margin-bottom:24px;max-width:480px">
           The Pholio app turns any answer you've read into an offline guide — maps, addresses, hours, and local notes bundled per city.
@@ -212,28 +234,6 @@ const recentAnswers = [
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  {/* Recent answers */}
-  <section class="max-page sec">
-    <div class="sec-head" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px">
-      <div>
-        <div class="eyebrow" style="margin-bottom:16px">§ 04 · Recently answered</div>
-        <h2 class="display-h2">Fresh off the desk.</h2>
-      </div>
-      <a href="/questions/" class="ulink" style="font-size:14px">All recent →</a>
-    </div>
-    <div style="max-width:900px">
-      {recentAnswers.map((q, i) => (
-        <QuestionCard
-          {...q}
-          variant="compact"
-          class:list={i === recentAnswers.length - 1 ? ['hairline-b'] : []}
-        />
-      ))}
     </div>
   </section>
 </BaseLayout>

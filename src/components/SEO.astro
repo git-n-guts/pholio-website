@@ -1,4 +1,6 @@
 ---
+import faviconSrc from '../img/favicon.png';
+
 /**
  * SEO component - handles all meta tags, JSON-LD structured data,
  * hreflang alternates. Critical for AEO (Answer Engine Optimization).
@@ -178,4 +180,4 @@ const websiteSchema = schemaType === 'WebSite'
 )}
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="icon" type="image/png" href={faviconSrc.src} />
