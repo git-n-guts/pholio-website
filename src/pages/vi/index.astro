@@ -107,7 +107,7 @@ const cities = [
   <section class="max-page" style="padding-top:96px;padding-bottom:96px">
     <div style="max-width:960px">
       <div class="eyebrow" style="margin-bottom:24px">Q&amp;A biên tập · Du lịch Việt Nam</div>
-      <h1 class="hero-h1">Câu trả lời thật từ người địa phương<br/>về <em>du lịch Việt Nam.</em></h1>
+      <h1 class="hero-h1">Câu trả lời thật từ người địa phương<br/>về <em>du lịch <span class="sf" aria-live="polite"><span class="sf-word">Việt Nam.</span></span></em></h1>
       <p class="muted" style="margin-top:32px;max-width:560px;font-size:19px;line-height:1.6">
         Câu hỏi cụ thể, câu trả lời cụ thể. Không phải danh sách top-10, không phải content farm — chỉ là tư vấn biên tập từ những người đang sống ở đó.
       </p>
@@ -258,4 +258,68 @@ const cities = [
       grid-template-columns: 1fr 1fr !important;
     }
   }
+
+  /* Split-flap flip effect */
+  :global(.sf) {
+    display: inline-block;
+    position: relative;
+    perspective: 400px;
+    vertical-align: baseline;
+  }
+  :global(.sf::after) {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: 52%;
+    height: 2px;
+    background: var(--bg);
+    z-index: 2;
+    pointer-events: none;
+  }
+  :global(.sf-word) {
+    display: inline-block;
+    backface-visibility: hidden;
+    white-space: nowrap;
+  }
+  @keyframes sf-fold-out {
+    from { transform: rotateX(0deg); }
+    to   { transform: rotateX(-90deg); }
+  }
+  @keyframes sf-fold-in {
+    from { transform: rotateX(90deg); }
+    to   { transform: rotateX(0deg); }
+  }
+  :global(.sf-word.sf-out) {
+    animation: sf-fold-out 0.15s ease-in forwards;
+    transform-origin: bottom center;
+  }
+  :global(.sf-word.sf-in) {
+    animation: sf-fold-in 0.15s ease-out forwards;
+    transform-origin: top center;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(.sf-word.sf-out),
+    :global(.sf-word.sf-in) { animation: none; }
+  }
 </style>
+
+<script is:inline>
+(function () {
+  var places = ['Việt Nam.','Hà Nội.','Hội An.','Nha Trang.','Sài Gòn.','Đà Nẵng.','Huế.','Phú Quốc.'];
+  var i = 0;
+  var el = document.querySelector('.sf-word');
+  if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var D = 150;
+  setInterval(function () {
+    i = (i + 1) % places.length;
+    el.classList.add('sf-out');
+    setTimeout(function () {
+      el.textContent = places[i];
+      el.classList.remove('sf-out');
+      void el.offsetWidth;
+      el.classList.add('sf-in');
+      setTimeout(function () { el.classList.remove('sf-in'); }, D + 50);
+    }, D);
+  }, 1500);
+})();
+</script>

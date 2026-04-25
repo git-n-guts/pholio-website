@@ -109,7 +109,7 @@ const cities = [
   <section class="max-page" style="padding-top:96px;padding-bottom:96px">
     <div style="max-width:960px">
       <div class="eyebrow" style="margin-bottom:24px">An editorial Q&amp;A · Vietnam travel</div>
-      <h1 class="hero-h1">Real answers from locals<br/>about traveling <em>Vietnam.</em></h1>
+      <h1 class="hero-h1">Real answers from locals<br/>about traveling <em class="sf" aria-live="polite"><span class="sf-word">Vietnam.</span></em></h1>
       <p class="muted" style="margin-top:32px;max-width:560px;font-size:19px;line-height:1.6">
         Specific questions, specific answers. No listicles, no content farms — just editorial guidance from people who actually live there.
       </p>
@@ -266,4 +266,69 @@ const cities = [
       grid-template-columns: 1fr 1fr !important;
     }
   }
+
+  /* Split-flap flip effect */
+  :global(.sf) {
+    display: inline-block;
+    position: relative;
+    perspective: 400px;
+    vertical-align: baseline;
+  }
+  /* Seam line — the mechanical split between top and bottom panel */
+  :global(.sf::after) {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: 52%;
+    height: 2px;
+    background: var(--bg);
+    z-index: 2;
+    pointer-events: none;
+  }
+  :global(.sf-word) {
+    display: inline-block;
+    backface-visibility: hidden;
+    white-space: nowrap;
+  }
+  @keyframes sf-fold-out {
+    from { transform: rotateX(0deg); }
+    to   { transform: rotateX(-90deg); }
+  }
+  @keyframes sf-fold-in {
+    from { transform: rotateX(90deg); }
+    to   { transform: rotateX(0deg); }
+  }
+  :global(.sf-word.sf-out) {
+    animation: sf-fold-out 0.15s ease-in forwards;
+    transform-origin: bottom center;
+  }
+  :global(.sf-word.sf-in) {
+    animation: sf-fold-in 0.15s ease-out forwards;
+    transform-origin: top center;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(.sf-word.sf-out),
+    :global(.sf-word.sf-in) { animation: none; }
+  }
 </style>
+
+<script is:inline>
+(function () {
+  var places = ['Vietnam.','Hanoi.','Hoi An.','Nha Trang.','Saigon.','Da Nang.','Hue.','Phu Quoc.'];
+  var i = 0;
+  var el = document.querySelector('.sf-word');
+  if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var D = 150;
+  setInterval(function () {
+    i = (i + 1) % places.length;
+    el.classList.add('sf-out');
+    setTimeout(function () {
+      el.textContent = places[i];
+      el.classList.remove('sf-out');
+      void el.offsetWidth; /* force reflow to restart animation */
+      el.classList.add('sf-in');
+      setTimeout(function () { el.classList.remove('sf-in'); }, D + 50);
+    }, D);
+  }, 1500);
+})();
+</script>
