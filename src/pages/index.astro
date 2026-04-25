@@ -274,17 +274,6 @@ const cities = [
     perspective: 400px;
     vertical-align: baseline;
   }
-  /* Seam line — the mechanical split between top and bottom panel */
-  :global(.sf::after) {
-    content: '';
-    position: absolute;
-    left: 0; right: 0;
-    top: 52%;
-    height: 2px;
-    background: var(--bg);
-    z-index: 2;
-    pointer-events: none;
-  }
   :global(.sf-word) {
     display: inline-block;
     backface-visibility: hidden;
