@@ -67,12 +67,12 @@ const questionNum = String(
   </div>
 
   {/* Hidden metadata for Pagefind filters */}
-  <div
-    data-pagefind-filter={`category:${categoryLabels[data.category]}`}
-    data-pagefind-filter-city={data.cityDisplay}
-    data-pagefind-meta={`image[src]:${data.heroImage || '/og-default.png'}`}
-    style="display:none"
-  ></div>
+  <div style="display:none">
+    <span data-pagefind-filter={`category:${categoryLabels[data.category]}`}></span>
+    <span data-pagefind-filter="language:en"></span>
+    <span data-pagefind-filter-city={data.cityDisplay}></span>
+    <span data-pagefind-meta={`image[src]:${data.heroImage || '/og-default.png'}`}></span>
+  </div>
 
   <div class="max-page art-wrap">
     <aside class="art-rail">

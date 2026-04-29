@@ -54,13 +54,21 @@ const questionNum = String(
   keywords={data.keywords}
 >
   <div class="max-page" style="padding-top:40px">
-    <nav class="crumb" aria-label="Breadcrumb">
-      <a href="/vi/">VIỆT NAM</a>
+    <nav class="crumb" aria-label="Breadcrumb" style="text-transform:none">
+      <a href="/vi/">Việt Nam</a>
       <span class="sep">→</span>
-      <a href={`/vi/cities/${data.city}/`}>{data.cityDisplay.toUpperCase()}</a>
+      <a href={`/vi/cities/${data.city}/`}>{data.cityDisplay}</a>
       <span class="sep">→</span>
-      <a href={`/vi/categories/${data.category}/`}>{categoryLabels[data.category].toUpperCase()}</a>
+      <a href={`/vi/categories/${data.category}/`}>{categoryLabels[data.category]}</a>
     </nav>
+  </div>
+
+  {/* Hidden metadata for Pagefind filters */}
+  <div style="display:none">
+    <span data-pagefind-filter={`category:${categoryLabels[data.category]}`}></span>
+    <span data-pagefind-filter="language:vi"></span>
+    <span data-pagefind-filter-city={data.cityDisplay}></span>
+    <span data-pagefind-meta={`image[src]:${data.heroImage || '/og-default.png'}`}></span>
   </div>
 
   <div class="max-page art-wrap">
@@ -113,8 +121,8 @@ const questionNum = String(
       </header>
 
       <div class="answer-box" style="margin-bottom:56px" aria-label="Trả lời nhanh">
-        <div class="lbl">Trả lời nhanh</div>
-        <p set:html={data.quickAnswer}></p>
+        <div class="lbl" style="text-transform:none">Trả lời nhanh</div>
+        <p set:html={data.quickAnswer} style="text-transform:none"></p>
         <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(194,65,12,.2);display:flex;justify-content:space-between;font-size:12px">
           <span class="mono muted">
             ĐÃ XÁC THỰC · {(data.updatedDate || data.pubDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase()}

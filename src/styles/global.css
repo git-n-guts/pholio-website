@@ -8,9 +8,8 @@
   --border:#E8E2D5;
   --borderS:#D4CDB9;
   --warmpaper:#F5F1E6;
-  --font-heading:'Bona Nova SC',Georgia,serif;
+  --font-heading:'Instrument Serif',Georgia,serif;
 }
-html[lang="en"]{--font-heading:'Instrument Serif',Georgia,serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
