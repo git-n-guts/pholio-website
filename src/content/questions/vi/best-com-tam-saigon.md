@@ -1,6 +1,6 @@
 ---
 title: "Cơm tấm ngon nhất Sài Gòn ở đâu?"
-description: "Các quán cơm tấm ngon nhất Sài Gòn: Ba Ghiền (sườn nướng than), Thuận Kiều (Chợ Lớn). Địa chỉ cụ thể, giá 2026 (45K–70K đồng), và món nên gọi."
+description: "Cơm tấm ngon nhất Sài Gòn: Ba Ghiền (Phú Nhuận), Thuận Kiều (Chợ Lớn). Địa chỉ, giá 2026 (45K–70K đồng), món nên gọi và cách phân biệt quán ngon."
 canonicalSlug: "best-com-tam-saigon"
 city: "saigon"
 cityDisplay: "Sài Gòn"
