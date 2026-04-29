@@ -36,4 +36,4 @@ User-agent: Bytespider
 Allow: /
 
 # Sitemap
-Sitemap: https://pholio.co/sitemap-index.xml
+Sitemap: https://pholio.click/sitemap-index.xml

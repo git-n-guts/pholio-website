@@ -49,7 +49,7 @@ const questionNum = String(
   pubDate={data.pubDate}
   updatedDate={data.updatedDate}
   author={data.author}
-  image={data.heroImage}
+  image={data.heroImage || '/thumbnail-vn.png'}
   faq={data.faq}
   keywords={data.keywords}
 >
@@ -68,7 +68,7 @@ const questionNum = String(
     <span data-pagefind-filter={`category:${categoryLabels[data.category]}`}></span>
     <span data-pagefind-filter="language:vi"></span>
     <span data-pagefind-filter-city={data.cityDisplay}></span>
-    <span data-pagefind-meta={`image[src]:${data.heroImage || '/og-default.png'}`}></span>
+    <span data-pagefind-meta={`image[src]:${data.heroImage || '/thumbnail-vn.png'}`}></span>
   </div>
 
   <div class="max-page art-wrap">
