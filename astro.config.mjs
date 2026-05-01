@@ -16,6 +16,11 @@ export default defineConfig({
         },
       },
       filter: (page) => !page.includes('/draft/'),
+      serialize: (item) => {
+        // Add lastmod to every sitemap entry so GSC knows when to re-crawl
+        item.lastmod = new Date().toISOString();
+        return item;
+      },
     }),
   ],
   i18n: {
