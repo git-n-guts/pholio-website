@@ -110,7 +110,7 @@ Choosing where to stay in Nha Trang depends on your budget, travel style, and wh
 **Pros:**
 - Cheapest accommodation
 - Most hostels and budget options
-- Vibrant nightlife (bars open late)
+- Active nightlife (bars open late)
 - Cheap street food
 - Easy to meet other travelers
 

@@ -15,7 +15,7 @@ faq:
   - q: "What can I do in Đà Lạt on a day trip?"
     a: "With only 4 hours in Đà Lạt, focus on: Xuân Hương Lake (central), flower gardens (Đà Lạt Flower Garden or Valley of Love), and coffee at a scenic café. Skip distant attractions like Crazy House or Datanla Falls — not enough time."
   - q: "Is there a better alternative to a Đà Lạt day trip?"
-    a: "Yes — stay overnight in Đà Lạt for 2 days/1 night. This lets you explore at a relaxed pace, see more attractions, and experience Đà Lạt's cool evening atmosphere. Many travelers combine Nha Trang (beach) with Đà Lạt (mountains) in one trip."
+    a: "Yes — stay overnight in Đà Lạt for 2 days/1 night. This lets you visit attractions at a relaxed pace, see more sights, and experience Đà Lạt's cool evening atmosphere. Many travelers combine Nha Trang (beach) with Đà Lạt (mountains) in one trip."
 keywords:
   - "Đà Lạt day trip from Nha Trang"
   - "Nha Trang to Đà Lạt"
@@ -37,7 +37,7 @@ keywords:
 **Day trip timeline:**
 - 7:00am: Depart Nha Trang
 - 11:00am: Arrive Đà Lạt
-- 11:00am–3:00pm: Explore (4 hours)
+- 11:00am–3:00pm: Sightseeing (4 hours)
 - 3:00pm: Depart Đà Lạt
 - 7:00pm: Arrive back Nha Trang
 
@@ -193,7 +193,7 @@ keywords:
 **Day 1:**
 - Morning: Depart Nha Trang 9am
 - Afternoon: Arrive Đà Lạt, check-in
-- Evening: Explore night market, street food
+- Evening: Visit night market, street food
 - Overnight: Đà Lạt (hotel from $15 USD)
 
 **Day 2:**

@@ -151,7 +151,7 @@ You don't need a motorbike to get around Nha Trang — in fact, most travelers d
 
 **Pros:**
 - Free
-- Best way to explore
+- Best way to get around
 - No parking hassles
 - Good exercise
 

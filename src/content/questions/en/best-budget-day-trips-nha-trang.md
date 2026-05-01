@@ -24,7 +24,7 @@ keywords:
   - "island tour Nha Trang price"
 ---
 
-You don't need to spend big to explore beyond Nha Trang. Here are the best day trips under $30 (750,000 VND) that deliver great value.
+You don't need to spend big to travel beyond Nha Trang. Here are the best day trips under $30 (750,000 VND) that deliver great value.
 
 ## 1. Ba Hồ Waterfall (Best Nature Trip)
 

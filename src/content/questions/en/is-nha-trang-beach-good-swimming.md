@@ -62,7 +62,7 @@ Jellyfish are the only real hazard for swimmers in Nha Trang. They're not danger
 
 **Rainy season (Sep–Nov):** Storm drains discharge into the bay after heavy rain. Water turns brown for 24–48 hours, and visibility drops to 0.5 meters. Don't swim within 100 meters of drainage outlets — you can spot them as concrete pipes poking out of the sand.
 
-**Pollution:** The bay is cleaner than it was 10 years ago (hotels stopped dumping sewage directly into the sea), but it's not pristine. After holiday weekends, you'll find plastic bottles and food wrappers washed up. The city cleans the beach every evening, but it's a losing battle.
+**Pollution:** The bay is cleaner than it was 10 years ago (hotels stopped dumping sewage directly into the sea), but it's not perfectly clean. After holiday weekends, you'll find plastic bottles and food wrappers washed up. The city cleans the beach every evening, but it's a losing battle.
 
 ## Safety tips
 
@@ -73,7 +73,7 @@ Jellyfish are the only real hazard for swimmers in Nha Trang. They're not danger
 
 ## The verdict
 
-Nha Trang beach is good for swimming — not world-class, but solid. It's safe for families, accessible for beginners, and convenient for hotel guests. If you want pristine water and empty beaches, take a boat to Hon Tằm island (15 minutes offshore). If you want a morning lap before breakfast, the main beach is perfect.
+Nha Trang beach is good for swimming — not world-class, but solid. It's safe for families, accessible for beginners, and convenient for hotel guests. If you want clean water and empty beaches, take a boat to Hon Tằm island (15 minutes offshore). If you want a morning lap before breakfast, the main beach is perfect.
 
 **Best for:** Families, casual swimmers, hotel guests who want quick beach access.
 **Skip if:** You're a serious swimmer seeking open-water conditions or a snorkeler wanting coral within arm's reach.

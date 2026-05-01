@@ -109,7 +109,7 @@ Hon Tằm is the most developed island in Nha Trang Bay — a 117-hectare landma
 
 **Worth visiting if:** You want a safe, clean beach day with facilities (showers, restaurants, sunbeds). Ideal for families and couples.
 
-**Skip if:** You're seeking pristine nature, snorkeling, or a budget beach day. Go to Hon Mun (snorkeling) or Bai Dai (pristine sand) instead.
+**Skip if:** You're seeking untouched nature, snorkeling, or a budget beach day. Go to Hon Mun (snorkeling) or Bai Dai (clean sand) instead.
 
 **Sample itinerary:**
 - 8:00am: Ferry from Cầu Đá pier

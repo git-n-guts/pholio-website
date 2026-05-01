@@ -6,7 +6,7 @@ city: "nha-trang"
 cityDisplay: "Nha Trang"
 category: "activities"
 pubDate: 2026-04-30
-quickAnswer: "<strong>Bai Dai is better for pristine water and solitude</strong> — cleaner, less crowded, more natural. But it's 25km from Nha Trang (30–40 min by motorbike/taxi). <strong>City beach (Trần Phú)</strong> is better for convenience — walkable from hotels, lifeguards on duty, restaurants nearby. Choose Bai Dai for a dedicated beach day; choose city beach for morning swims before breakfast."
+quickAnswer: "<strong>Bai Dai is better for clean water and solitude</strong> — cleaner, less crowded, more natural. But it's 25km from Nha Trang (30–40 min by motorbike/taxi). <strong>City beach (Trần Phú)</strong> is better for convenience — walkable from hotels, lifeguards on duty, restaurants nearby. Choose Bai Dai for a dedicated beach day; choose city beach for morning swims before breakfast."
 readingTime: 5
 featured: false
 faq:
@@ -58,7 +58,7 @@ Bai Dai (Long Beach) and Nha Trang's city beach are two different worlds — 25 
 
 **What it is:** A 6-kilometer urban beach running the length of Nha Trang's main road.
 
-**Water quality:** Good for an urban beach. Visibility is 1–2 meters, dropping to 0.5 meters after rain. Clean enough for swimming, not pristine.
+**Water quality:** Good for an urban beach. Visibility is 1–2 meters, dropping to 0.5 meters after rain. Clean enough for swimming.
 
 **Crowds:** Heavy from 8am–6pm. You're sharing space with tourists, locals, and street vendors.
 
@@ -79,7 +79,7 @@ Bai Dai (Long Beach) and Nha Trang's city beach are two different worlds — 25 
 
 **Not good for:**
 - Solitude
-- Pristine water photos
+- Clean water photos
 - Peaceful sunbathing (expect noise)
 
 ## How to choose
@@ -118,4 +118,4 @@ Bai Dai (Long Beach) and Nha Trang's city beach are two different worlds — 25 
 
 Bai Dai is better if you're asking "which beach is nicer?" City beach is better if you're asking "which beach is easier?"
 
-For most visitors: do both. Spend one morning at city beach (convenient, lifeguards), and dedicate one afternoon to Bai Dai (pristine, adventurous). The 25-kilometer trip is worth it once — whether you repeat it depends on how much you value sand over convenience.
+For most visitors: do both. Spend one morning at city beach (convenient, lifeguards), and dedicate one afternoon to Bai Dai (clean, adventurous). The 25-kilometer trip is worth it once — whether you repeat it depends on how much you value sand over convenience.
