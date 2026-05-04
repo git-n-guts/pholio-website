@@ -5,6 +5,7 @@ interface Props {
   region: string;
   questionCount: number;
   featured?: boolean;
+  inSeason?: boolean;
   lang?: 'en' | 'vi';
 }
 
@@ -14,14 +15,17 @@ const {
   region,
   questionCount,
   featured = false,
+  inSeason = false,
   lang = 'en',
 } = Astro.props;
 
 const questionsLabel = lang === 'vi' ? 'câu hỏi' : 'questions';
+const badgeLabel = lang === 'vi' ? 'Đúng mùa' : 'Peak season';
 ---
 
 <a href={href} class:list={['city-card', { feat: featured }]}>
   <div>
+    {inSeason && <span class="season-badge">{badgeLabel}</span>}
     <div class:list={['eyebrow', { acc: featured }]}>
       {featured ? (lang === 'vi' ? 'Nổi bật' : 'Featured') : region}
     </div>

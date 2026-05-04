@@ -1,0 +1,249 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+// --- Hardcoded demo data (no content collection) ---
+
+const city = {
+  name: 'Ho Chi Minh City',
+  tagline: 'Vietnam\'s engine — chaotic, delicious, and completely alive at 2am.',
+  bestSeason: 'Dec — Apr',
+  daysRecommended: '3 — 5 days',
+  budgetLevel: 'mid-range',
+};
+
+const PILLAR_LABELS: Record<string, { label: string; icon: string }> = {
+  food:      { label: 'Food & Cuisine',       icon: '🍜' },
+  nature:    { label: 'Nature & Scenery',     icon: '🌿' },
+  culture:   { label: 'Culture & Festivals',  icon: '🎭' },
+  history:   { label: 'History & Heritage',   icon: '🏛' },
+  logistics: { label: 'Getting Around',       icon: '🚌' },
+  planning:  { label: 'Planning & Day Trips', icon: '🗺' },
+};
+
+const ALL_PILLAR_IDS = ['food', 'nature', 'culture', 'history', 'logistics', 'planning'];
+
+// Saigon pillar data — 'nature' intentionally absent to demo the dimmed state
+const pillarData: Record<string, { strength: 'strong' | 'moderate' | 'light'; note?: string }> = {
+  food:      { strength: 'strong',   note: '24h dining city: bánh mì, hủ tiếu, bia hơi, rooftop bars' },
+  culture:   { strength: 'strong',   note: 'Chợ Lớn, đền Giác Lâm, đa văn hóa Hoa–Việt–Pháp' },
+  history:   { strength: 'moderate', note: 'Bảo tàng Chứng tích Chiến tranh, Dinh Độc Lập, phố Pháp' },
+  logistics: { strength: 'strong',   note: 'Sân bay quốc tế lớn nhất VN, hub kết nối toàn quốc' },
+  planning:  { strength: 'moderate' },
+  // 'nature' absent → shown dimmed
+};
+
+const PILLAR_CATEGORIES: Record<string, string[]> = {
+  food:      ['food'],
+  nature:    ['activities'],
+  culture:   ['culture'],
+  history:   ['culture'],
+  logistics: ['transport', 'accommodation', 'budget', 'safety'],
+  planning:  ['planning', 'weather'],
+};
+
+const LOGISTICS_SUBFILTERS = [
+  { id: 'transport',     label: 'Getting There' },
+  { id: 'accommodation', label: 'Where to Stay' },
+  { id: 'budget',        label: 'Costs' },
+  { id: 'safety',        label: 'Safety' },
+];
+
+const questions = [
+  { title: 'Where to eat bánh mì in Saigon like a local',                   category: 'food',          slug: '#', readingTime: 5 },
+  { title: 'Best street food areas in Ho Chi Minh City',                    category: 'food',          slug: '#', readingTime: 6 },
+  { title: 'Hủ tiếu Nam Vang — what is it and where to find the best?',    category: 'food',          slug: '#', readingTime: 4 },
+  { title: 'Is Chợ Lớn worth visiting for a day?',                          category: 'culture',       slug: '#', readingTime: 5 },
+  { title: 'Best pagodas and temples in Saigon',                            category: 'culture',       slug: '#', readingTime: 5 },
+  { title: 'War Remnants Museum — is it too graphic for sensitive visitors?',category: 'culture',       slug: '#', readingTime: 4 },
+  { title: 'Reunification Palace — how much time do you actually need?',    category: 'culture',       slug: '#', readingTime: 3 },
+  { title: 'Best day trips from Ho Chi Minh City',                          category: 'activities',    slug: '#', readingTime: 7 },
+  { title: 'How to get from Tân Sơn Nhất airport to central Saigon',       category: 'transport',     slug: '#', readingTime: 4 },
+  { title: 'Is Grab safe and reliable in Ho Chi Minh City?',                category: 'transport',     slug: '#', readingTime: 3 },
+  { title: 'Best neighborhoods to stay in Saigon for first-timers',        category: 'accommodation', slug: '#', readingTime: 6 },
+  { title: 'How much does a week in Ho Chi Minh City actually cost?',      category: 'budget',        slug: '#', readingTime: 5 },
+  { title: 'Is Ho Chi Minh City safe for solo female travelers?',           category: 'safety',        slug: '#', readingTime: 5 },
+  { title: 'How many days do you need in Ho Chi Minh City?',               category: 'planning',      slug: '#', readingTime: 4 },
+  { title: 'Best time to visit Ho Chi Minh City — month by month',         category: 'weather',       slug: '#', readingTime: 5 },
+];
+
+const categoryLabel: Record<string, string> = {
+  food: 'Food', transport: 'Transport', culture: 'Culture', weather: 'Weather',
+  budget: 'Budget', safety: 'Safety', planning: 'Planning',
+  activities: 'Activities', accommodation: 'Stay',
+};
+---
+
+<BaseLayout
+  title="Ho Chi Minh City — Pholio [DEMO]"
+  description="Demo page for Epic 13 Pillar Navigation System. Not for production."
+  lang="en"
+  canonicalSlug="cities-saigon-demo"
+  schemaType="CollectionPage"
+  keywords={[]}
+>
+  <!-- Demo banner -->
+  <div style="background:var(--ink);color:var(--bg);text-align:center;padding:10px 24px;font-size:13px;letter-spacing:.08em;font-family:ui-monospace,monospace">
+    DEMO — Epic 13 Pillar Navigation · Not production · <a href="/cities/saigon" style="color:var(--accent);text-decoration:underline">View real page →</a>
+  </div>
+
+  <section class="max-page" style="padding-top:64px;padding-bottom:48px">
+    <nav class="crumb">
+      <a href="/">VIETNAM</a>
+      <span class="sep">→</span>
+      <a href="/cities/">SOUTH</a>
+      <span class="sep">→</span>
+      <span class="cur">HO CHI MINH CITY</span>
+    </nav>
+    <h1 class="city-display" style="margin-top:24px">Saigon<span class="acc">.</span></h1>
+    <p style="font-family:var(--font-heading);font-size:clamp(22px,3vw,34px);line-height:1.25;color:var(--muted);max-width:720px;font-style:italic;margin-top:24px">
+      {city.tagline}
+    </p>
+
+    <div style="display:flex;gap:48px;margin-top:40px;flex-wrap:wrap">
+      <div>
+        <div class="eyebrow" style="margin-bottom:6px">Best season</div>
+        <div style="font-family:var(--font-heading);font-size:22px">{city.bestSeason}</div>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:6px">Days to visit</div>
+        <div style="font-family:var(--font-heading);font-size:22px">{city.daysRecommended}</div>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:6px">Budget level</div>
+        <div style="font-family:var(--font-heading);font-size:22px;text-transform:capitalize">{city.budgetLevel}</div>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:6px">Questions</div>
+        <div style="font-family:var(--font-heading);font-size:22px">{questions.length}</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule max-page"></div>
+
+  <section class="max-page" style="padding-top:48px;padding-bottom:96px">
+
+    <!-- Pillar Grid -->
+    <div class="eyebrow" style="margin-bottom:20px">Explore by topic</div>
+    <div class="pillar-grid" id="pillar-grid">
+      {ALL_PILLAR_IDS.map((id) => {
+        const data = pillarData[id];
+        const { label, icon } = PILLAR_LABELS[id];
+        const strength = data?.strength ?? 'absent';
+        return (
+          <button
+            class={`pillar-card pillar-card--${strength}`}
+            data-pillar={id}
+            data-strength={strength}
+            aria-pressed="false"
+          >
+            <span class="pillar-icon">{icon}</span>
+            <span class="pillar-label">{label}</span>
+            {data?.note && <span class="pillar-note">{data.note}</span>}
+          </button>
+        );
+      })}
+    </div>
+
+    <!-- Logistics sub-filter (hidden until logistics pillar is active) -->
+    <div class="pillar-subfilter" id="logistics-subfilter">
+      {LOGISTICS_SUBFILTERS.map((chip) => (
+        <button class="chip" data-subfilter={chip.id}>{chip.label}</button>
+      ))}
+    </div>
+
+    <!-- Questions list -->
+    <div id="questions-list">
+      {questions.map((q) => (
+        <article class="q-item q-card" data-category={q.category}>
+          <div class="meta">
+            <span class="cat-tag">{categoryLabel[q.category] ?? q.category}</span>
+            <span class="muted" style="font-size:13px">Saigon · {q.readingTime} min</span>
+          </div>
+          <h3 style="font-size:clamp(20px,2.5vw,26px);line-height:1.2;margin-bottom:0">{q.title}</h3>
+        </article>
+      ))}
+    </div>
+
+  </section>
+</BaseLayout>
+
+<script define:vars={{ PILLAR_CATEGORIES }}>
+  const grid = document.getElementById('pillar-grid');
+  const subfilterBar = document.getElementById('logistics-subfilter');
+  const items = document.querySelectorAll('.q-item');
+  let activePillar = null;
+  let activeSubfilters = new Set();
+
+  function showAll() {
+    items.forEach((el) => el.classList.remove('is-hidden'));
+  }
+
+  function filterByCategories(cats) {
+    items.forEach((el) => {
+      const cat = el.dataset.category;
+      el.classList.toggle('is-hidden', !cats.includes(cat));
+    });
+  }
+
+  function applySubfilter() {
+    if (activeSubfilters.size === 0) {
+      filterByCategories(PILLAR_CATEGORIES.logistics);
+    } else {
+      filterByCategories([...activeSubfilters]);
+    }
+  }
+
+  grid.addEventListener('click', (e) => {
+    const card = e.target.closest('[data-pillar]');
+    if (!card || card.dataset.strength === 'absent') return;
+
+    const pillar = card.dataset.pillar;
+
+    // Toggle off if already active
+    if (activePillar === pillar) {
+      activePillar = null;
+      activeSubfilters.clear();
+      card.classList.remove('is-active');
+      card.setAttribute('aria-pressed', 'false');
+      subfilterBar.classList.remove('is-open');
+      showAll();
+      return;
+    }
+
+    // Deactivate previous
+    grid.querySelectorAll('.pillar-card.is-active').forEach((c) => {
+      c.classList.remove('is-active');
+      c.setAttribute('aria-pressed', 'false');
+    });
+    subfilterBar.classList.remove('is-open');
+    activeSubfilters.clear();
+    subfilterBar.querySelectorAll('.chip').forEach((c) => c.classList.remove('is-active'));
+
+    // Activate new
+    activePillar = pillar;
+    card.classList.add('is-active');
+    card.setAttribute('aria-pressed', 'true');
+
+    if (pillar === 'logistics') {
+      subfilterBar.classList.add('is-open');
+      filterByCategories(PILLAR_CATEGORIES.logistics);
+    } else {
+      filterByCategories(PILLAR_CATEGORIES[pillar] ?? []);
+    }
+  });
+
+  subfilterBar.addEventListener('click', (e) => {
+    const chip = e.target.closest('[data-subfilter]');
+    if (!chip) return;
+    const sub = chip.dataset.subfilter;
+    if (activeSubfilters.has(sub)) {
+      activeSubfilters.delete(sub);
+      chip.classList.remove('is-active');
+    } else {
+      activeSubfilters.add(sub);
+      chip.classList.add('is-active');
+    }
+    applySubfilter();
+  });
+</script>

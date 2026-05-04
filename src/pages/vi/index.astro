@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import QuestionCard from '@components/QuestionCard.astro';
 import CityCard from '@components/CityCard.astro';
+import { currentSeason } from '../../data/seasonal-cities';
 
 const categoryLabels: Record<string, string> = {
   food: 'Ẩm thực',
@@ -83,16 +84,27 @@ const popularQuestions = [
   },
 ];
 
-const cities = [
-  { name: 'Hà Nội', region: 'Bắc · Thủ đô', questionCount: 54, href: '/vi/cities/hanoi/' },
-  { name: 'Sài Gòn', region: 'Nam · Đô thị', questionCount: 67, href: '/vi/cities/saigon/' },
-  { name: 'Hội An', region: 'Trung · UNESCO', questionCount: 48, href: '/vi/cities/hoi-an/', featured: true },
-  { name: 'Đà Nẵng', region: 'Trung · Ven biển', questionCount: 31, href: '/vi/cities/da-nang/' },
-  { name: 'Sa Pa', region: 'Tây Bắc · Vùng cao', questionCount: 22, href: '/vi/cities/sapa/' },
-  { name: 'Huế', region: 'Trung · Cố đô', questionCount: 19, href: '/vi/cities/hue/' },
-  { name: 'Phú Quốc', region: 'Đảo · Phía Nam', questionCount: 27, href: '/vi/cities/phu-quoc/' },
-  { name: 'Nha Trang', region: 'Ven biển · Nghỉ dưỡng', questionCount: 18, href: '/vi/cities/nha-trang/' },
-];
+const allCities = await getCollection('cities');
+const viQuestions = await getCollection('questions', ({ data, id }) => !data.draft && id.startsWith('vi/'));
+const questionCountByCity = viQuestions.reduce<Record<string, number>>((acc, q) => {
+  acc[q.data.city] = (acc[q.data.city] ?? 0) + 1;
+  return acc;
+}, {});
+
+const seasonalCities = currentSeason.cities
+  .map(({ slug, inSeason }) => {
+    const city = allCities.find((c) => c.id === slug);
+    if (!city) return null;
+    return {
+      slug,
+      inSeason,
+      name: city.data.name,
+      region: city.data.region,
+      questionCount: questionCountByCity[slug] ?? 0,
+      href: `/vi/cities/${slug}/`,
+    };
+  })
+  .filter((c): c is NonNullable<typeof c> => c !== null);
 
 ---
 
@@ -162,12 +174,18 @@ const cities = [
 
   {/* Cities */}
   <section class="max-page sec">
-    <div class="sec-head">
-      <div class="eyebrow" style="margin-bottom:16px">§ 02 · Theo thành phố</div>
-      <h2 class="display-h2">Tám điểm đến, viết cẩn thận.</h2>
+    <div class="sec-head" style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px">§ 02 · Điểm đến</div>
+        <h2 class="display-h2">Lý tưởng cho {currentSeason.label.vi}<span class="acc">.</span></h2>
+        <p class="muted" style="margin-top:12px;font-size:16px;max-width:480px">
+          Viết cẩn thận. Người viết đã thực sự đặt chân đến.
+        </p>
+      </div>
+      <a href="/vi/cities/" class="ulink" style="font-size:14px">Xem tất cả →</a>
     </div>
     <div class="city-grid">
-      {cities.map((c) => <CityCard {...c} lang="vi" />)}
+      {seasonalCities.map((c) => <CityCard {...c} lang="vi" />)}
     </div>
   </section>
 

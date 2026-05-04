@@ -222,3 +222,23 @@ details>.answer{padding-top:14px;font-size:16px;line-height:1.7}
 /* Page title block */
 .ptitle{padding-top:80px;padding-bottom:48px}
 .ptitle .eyebrow{margin-bottom:16px}
+
+/* Pillar Grid (Epic 13) */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:48px}
+@media(max-width:599px){.pillar-grid{grid-template-columns:repeat(2,1fr)}}
+.pillar-card{border:1px solid var(--border);border-radius:4px;padding:20px 18px;cursor:pointer;transition:border-color .15s,box-shadow .15s;user-select:none}
+.pillar-card--strong{background:var(--accentbg);border-color:var(--accent)}
+.pillar-card--moderate{background:var(--warmpaper)}
+.pillar-card--light{background:var(--warmpaper);opacity:.6}
+.pillar-card--absent{background:transparent;border-style:dashed;opacity:.35;cursor:default;pointer-events:none}
+.pillar-card:not(.pillar-card--absent):hover{border-color:var(--ink)}
+.pillar-card.is-active{border-color:var(--ink)!important;box-shadow:0 0 0 1px var(--ink)}
+.pillar-icon{font-size:22px;margin-bottom:10px;display:block}
+.pillar-label{font-family:var(--font-heading);font-size:17px;line-height:1.2;display:block}
+.pillar-card--strong .pillar-label{color:var(--accent)}
+.pillar-card.is-active .pillar-label{color:var(--ink)!important}
+.pillar-note{font-size:13px;color:var(--muted);line-height:1.45;margin-top:6px;display:block}
+.pillar-subfilter{display:flex;flex-wrap:wrap;gap:8px;max-height:0;overflow:hidden;transition:max-height .25s ease,margin-bottom .25s ease;margin-bottom:0}
+.pillar-subfilter.is-open{max-height:80px;margin-bottom:28px}
+.q-item{transition:opacity .15s}
+.q-item.is-hidden{display:none}
